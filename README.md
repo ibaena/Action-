@@ -8,16 +8,16 @@ This project will be a database of movies. It will aim to help users pick/search
 We aim to make a clean UI and smooth expirience for the user while still delivering accurate results based on filters.
 
 technologies used: 
-*HTML5
-*CSS 
-*Javascript
-*Jquery
+* HTML5
+* CSS 
+* Javascript
+* Jquery
 
 
 ##api #1 
-*http://www.omdbapi.com/
+* http://www.omdbapi.com/
 ##api #2 
-*http://developer.rottentomatoes.com/
+* http://developer.rottentomatoes.com/
 
 ##trello: 
-*https://trello.com/b/3V6nqDMk/action
+* https://trello.com/b/3V6nqDMk/action
