@@ -14,9 +14,8 @@ technologies used:
 * Jquery
 
 
-##api #1 
+##api 
 * http://www.omdbapi.com/
-##api #2 
 * http://developer.rottentomatoes.com/
 
 ##trello: 
