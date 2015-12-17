@@ -1,31 +1,23 @@
 $(document).ready(function(){
 
+
 //ajax OMDB
 $("#search-btn").on('click',function(){
   var input = $('#search-input').val();
- 
-  $.ajax({
-    type:'GET',
-    url: 'http://www.omdbapi.com/?s='+input+'',
-    dataType: 'json',
-    success: function(data){
-      $.each(data, function(index,item){
-        $.each(item, function(number,obj){
-          $.each(obj, function(key,value){
-            $('#movies').append('<p>'+key+' : '+value+'</p>');
-           
-          })
-          
-        })
-        
-      })
-      console.log('success',data);
-    }
+  var omdbUrl = 'http://www.omdbapi.com/?s='+input+'&format=json';
 
-  })
+    $.getJSON(omdbUrl, function(data){ 
+      images = data.Search;
+      for (var i = 0; i < images.length; i++) {
+        console.log(data.Search[i].Poster);
+      //Movie Grid
+        $('.images').append('<img src='+data.Search[i].Poster+'/>')
+        $('.images').append('<h3>'+data.Search[i].Title+'</h3>')
 
+    };
 
+    })
 
-  })
+})
 
 });
