@@ -15,7 +15,7 @@ function searchCatalog(){
 
       for (var i = 0; i < images.length; i++) {
         console.log(images[i].Poster);
-        grid+='<img class="responsive-img" src='+images[i].Poster+' />';
+        grid+='<div class="col s3"><img class="responsive-img" src='+images[i].Poster+' /></div>';
       };
       
       $('.content').html(grid);
