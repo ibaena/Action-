@@ -4,7 +4,7 @@ $(document).ready(function(){
 function searchCatalog(){
   $("#search-input").keyup(function(){
   var input = $('#search-input').val();
-  var omdbUrl = 'http://www.omdbapi.com/?s='+input+'&format=json';
+  var omdbUrl = 'http://www.omdbapi.com/?s='+input+'&plot=full&format=json';
   var images;
   
 
@@ -14,7 +14,8 @@ function searchCatalog(){
       var grid = " ";
 
       for (var i = 0; i < images.length; i++) {
-        console.log(images[i].Poster);
+        // console.log(images[i].Poster);
+        var title = images[i].Title;
         grid+='<div class="col s3"><img class="responsive-img" src='+images[i].Poster+' /></div>';
       };
       
