@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+$(".dropdown-button").dropdown();
 
 
 //tmdb
@@ -49,7 +49,7 @@ function genreList(){
         genreContent += ' <li><a href="#!" class="genre-list">'+genre[i].name+'</a></li>';
       };
       $('#dropdown1').html(genreContent);
-      $(".dropdown-button").dropdown();
+      
     })
   })
 }
@@ -78,5 +78,25 @@ $('#release').on('click', function(e){
 
 }
 moviesOut();
+
+//discover new content
+
+function discoverContent(){
+  var discoverUrl = 'https://api.themoviedb.org/3/discover/movie?api_key=3729ffa22dfa780e9abb43dee3074695';
+  var discover;
+  var discoverContent = " ";
+
+  $('#discover').on('click',function(){
+    $.getJSON(discoverUrl,function(data){
+      discover = data.results;
+      
+      for (var i = 0; i < discover.length; i++) {
+        discoverContent+= '<div class="col s2"><img class="responsive-img poster" src="http://image.tmdb.org/t/p/w500'+discover[i].poster_path+'" /></div>';
+      };
+      $('.content').html(discoverContent);
+    })
+  })
+}
+discoverContent();
 
 });
