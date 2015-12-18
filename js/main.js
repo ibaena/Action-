@@ -14,12 +14,12 @@ function tmdbApi(){
     if(e.which == 13) {
     $.getJSON(plotUrl, function(data){
       movie = data.results;
-      
+
       
 
       for (var i = 0; i < movie.length; i++) {
-        grid+='<div class="col s3"><img class="responsive-img poster" src="http://image.tmdb.org/t/p/w500'+movie[i].poster_path+'" /></div>';
-        console.log(movie[i]);
+        grid+='<div class="col s2"><img class="responsive-img poster" src="http://image.tmdb.org/t/p/w500'+movie[i].poster_path+'" /></div>';
+        //console.log(movie[i]);
       };
 
       $('.content').html(grid);
@@ -49,8 +49,34 @@ function genreList(){
         genreContent += ' <li><a href="#!" class="genre-list">'+genre[i].name+'</a></li>';
       };
       $('#dropdown1').html(genreContent);
+      $(".dropdown-button").dropdown();
     })
   })
 }
 genreList();
+
+//create Theatre list
+function moviesOut(){
+
+  var movieList = 'http://api.themoviedb.org/3/movie/now_playing?api_key=3729ffa22dfa780e9abb43dee3074695&query'
+  var release;
+  var releaseContent = " ";
+$('#release').on('click', function(e){
+  e.preventDefault();
+  $.getJSON(movieList, function(data){
+    release = data.results;
+
+    for (var i = 0; i < release.length; i++) {
+      //console.log(release[i].title);
+      releaseContent+='<div class="col s2"><img class="responsive-img poster" src="http://image.tmdb.org/t/p/w500'+release[i].poster_path+'" /></div>';
+    };
+    $('.content').html(releaseContent);
+   
+  })
+
+})
+
+}
+moviesOut();
+
 });
