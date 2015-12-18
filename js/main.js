@@ -1,31 +1,39 @@
 $(document).ready(function(){
 
-//ajax OMDB
-$("#search-btn").on('click',function(){
+//ajax OMDB Search Movies
+function searchCatalog(){
+  $("#search-input").keyup(function(){
   var input = $('#search-input').val();
- 
-  $.ajax({
-    type:'GET',
-    url: 'http://www.omdbapi.com/?s='+input+'',
-    dataType: 'json',
-    success: function(data){
-      $.each(data, function(index,item){
-        $.each(item, function(number,obj){
-          $.each(obj, function(key,value){
-            $('#movies').append('<p>'+key+' : '+value+'</p>');
-           
-          })
-          
-        })
-        
-      })
-      console.log('success',data);
-    }
+  var omdbUrl = 'http://www.omdbapi.com/?s='+input+'&format=json';
+  var omdbPlot = 'http://www.omdbapi.com/?t='+input+'&format=json';
+  var images;
+  var details;
+  
+    $.getJSON(omdbUrl, function(data){ 
+      images = data.Search;
+      var grid = " ";
+      var title = " ";
 
+      for (var i = 0; i < images.length; i++) {
+        console.log(images[i].Poster);
+        grid+='<div class="col s3"><a href="http://www.omdbapi.com/?t='+images[i].Title+'&format=json" src=""><img class="responsive-img" src='+images[i].Poster+' /></a></div>';
+
+      };
+      //Movie Grid
+      $('.content').html(grid);
+      });
+
+    $.getJSON(omdbPlot, function(data){
+      
+      console.log(data.Plot);
+
+    });
   })
+}
 
 
+searchCatalog();
 
-  })
+
 
 });
