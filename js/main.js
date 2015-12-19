@@ -33,7 +33,8 @@ tmdbApi();
 
 //Movie Genre
 function popularList(){
-  var genreList = 'https://api.themoviedb.org/3/movie/popular?api_key=3729ffa22dfa780e9abb43dee3074695';
+  var genreList = 'https://api.themoviedb.org/3/movie/popular?api_key=3729ffa22dfa780e9abb43dee3074695&page=';
+  var page =1;
   var genre;
   var genreContent = " ";
   $('#searchDropdown').on('click', function(){
@@ -46,10 +47,50 @@ function popularList(){
         //console.log(genre[i].name);
         genreContent += '<div class="col s6"><div class="card"><div class="card-image"><img class="responsive-img poster" src="'+discoverImage+''+genre[i].backdrop_path+'" /><span class="card-title">'+genre[i].title+'</span></div></div></div>';
       };
-      $('.content').html(genreContent);
-      
+      $('.content').html(genreContent); 
+      $('#previous-btn').html('<a class="waves-effect waves-black btn-flat" id="back"><i class="material-icons">skip_previous</i></a>');
+      $('#next-btn').html('<a class="waves-effect waves-black btn-flat" id="add"><i class="material-icons">skip_next</i></a>')
     })
   })
+
+//next page
+  $('#next-btn').on('click','#add', function(e){
+    e.preventDefault();
+    page = page+1;
+    genreList = 'https://api.themoviedb.org/3/movie/popular?api_key=3729ffa22dfa780e9abb43dee3074695&page='+page;
+
+    $.getJSON(genreList,function(data){
+      genre = data.results;
+
+      for (var i = 0; i < genre.length; i++) {
+         
+        genreContent+= '<div class="col s6"><div class="card"><div class="card-image"><img class="responsive-img poster" src="'+discoverImage+''+genre[i].backdrop_path+'" /><span class="card-title">'+genre[i].title+'</span></div></div></div>';
+      };
+      $('.content').html(genreContent);
+
+
+  })
+
+})
+//Previous Button
+$('#previous-btn').on('click','#back', function(e){
+    e.preventDefault();
+    page = page-1;
+
+    genreUrl = 'https://api.themoviedb.org/3/movie/popular?api_key=3729ffa22dfa780e9abb43dee3074695&page='+page;
+
+    $.getJSON(genreUrl,function(data){
+      genre = data.results;
+
+      for (var i = 0; i < genre.length; i++) {
+         
+        genreContent+= '<div class="col s6"><div class="card"><div class="card-image"><img class="responsive-img poster" src="'+discoverImage+''+genre[i].backdrop_path+'" /><span class="card-title">'+genre[i].title+'</span></div></div></div>';
+      };
+      $('.content').html(genreContent);
+    })
+
+})
+
 }
 popularList();
 
