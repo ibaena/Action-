@@ -97,7 +97,7 @@ popularList();
 //create Theatre list
 function moviesOut(){
 
-  var movieList = 'http://api.themoviedb.org/3/movie/now_playing?api_key=3729ffa22dfa780e9abb43dee3074695&query'
+  var movieList = 'https://api.themoviedb.org/3/movie/now_playing?api_key=3729ffa22dfa780e9abb43dee3074695&query'
   var release;
   var releaseContent = " ";
 $('#release').on('click', function(e){
@@ -156,6 +156,7 @@ function discoverContent(){
          
         discoverContent+= '<div class="col s6"><div class="card"><div class="card-image"><img class="responsive-img poster" src="'+discoverImage+''+discover[i].backdrop_path+'" /><span class="card-title">'+discover[i].title+'</span></div></div></div>';
       };
+      $('.content').empty();
       $('.content').html(discoverContent);
 
 
@@ -176,6 +177,7 @@ $('#previous-btn').on('click','#back', function(e){
          
         discoverContent+= '<div class="col s6"><div class="card"><div class="card-image"><img class="responsive-img poster" src="'+discoverImage+''+discover[i].backdrop_path+'" /><span class="card-title">'+discover[i].title+'</span></div></div></div>';
       };
+       $('.content').empty();
       $('.content').html(discoverContent);
     })
 
