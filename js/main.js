@@ -1,5 +1,7 @@
 $(document).ready(function(){
 $(".dropdown-button").dropdown();
+var discoverImage = 'http://image.tmdb.org/t/p/w500';
+var m
 
 
 //tmdb
@@ -18,7 +20,7 @@ function tmdbApi(){
       
 
       for (var i = 0; i < movie.length; i++) {
-        grid+='<div class="col s2"><img class="responsive-img poster" src="http://image.tmdb.org/t/p/w500'+movie[i].poster_path+'" /></div>';
+        grid+='<div class="col s6"><div class="card"><div class="card-image"><img class="responsive-img poster" src="'+discoverImage+''+movie[i].backdrop_path+'" /><span class="card-title">'+movie[i].title+'</span></div></div></div>';
         //console.log(movie[i]);
       };
 
@@ -34,26 +36,26 @@ tmdbApi();
 
 
 //Movie Genre
-function genreList(){
-  var genreList = 'https://api.themoviedb.org/3/genre/movie/list?api_key=3729ffa22dfa780e9abb43dee3074695';
+function popularList(){
+  var genreList = 'https://api.themoviedb.org/3/movie/popular?api_key=3729ffa22dfa780e9abb43dee3074695';
   var genre;
   var genreContent = " ";
   $('#searchDropdown').on('click', function(){
 
     $.getJSON(genreList, function(data){
       console.log('data');
-      genre = data.genres;
+      genre = data.results;
 
       for (var i = 0; i < genre.length; i++) {
         console.log(genre[i].name);
-        genreContent += ' <li><a href="#!" class="genre-list">'+genre[i].name+'</a></li>';
+        genreContent += '<div class="col s6"><div class="card"><div class="card-image"><img class="responsive-img poster" src="'+discoverImage+''+genre[i].backdrop_path+'" /><span class="card-title">'+genre[i].title+'</span></div></div></div>';
       };
-      $('#dropdown1').html(genreContent);
+      $('.content').html(genreContent);
       
     })
   })
 }
-genreList();
+popularList();
 
 //create Theatre list
 function moviesOut(){
@@ -68,7 +70,7 @@ $('#release').on('click', function(e){
 
     for (var i = 0; i < release.length; i++) {
       //console.log(release[i].title);
-      releaseContent+='<div class="col s2"><img class="responsive-img poster" src="http://image.tmdb.org/t/p/w500'+release[i].poster_path+'" /></div>';
+      releaseContent+='<div class="col s6"><div class="card"><div class="card-image"><img class="responsive-img poster" src="'+discoverImage+''+release[i].backdrop_path+'" /><span class="card-title">'+release[i].title+'</span></div></div></div>';
     };
     $('.content').html(releaseContent);
    
@@ -82,21 +84,50 @@ moviesOut();
 //discover new content
 
 function discoverContent(){
-  var discoverUrl = 'https://api.themoviedb.org/3/discover/movie?api_key=3729ffa22dfa780e9abb43dee3074695';
+  var discoverUrl = 'https://api.themoviedb.org/3/discover/movie?api_key=3729ffa22dfa780e9abb43dee3074695&page=';
+  var page= 1;
   var discover;
   var discoverContent = " ";
+  var discoverImage = 'http://image.tmdb.org/t/p/w500';
 
-  $('#discover').on('click',function(){
+
+
+  $('#discover').on('click',function(e){
+    e.preventDefault();
     $.getJSON(discoverUrl,function(data){
       discover = data.results;
-      
+     
       for (var i = 0; i < discover.length; i++) {
-        discoverContent+= '<div class="col s2"><img class="responsive-img poster" src="http://image.tmdb.org/t/p/w500'+discover[i].poster_path+'" /></div>';
+         
+        discoverContent+= '<div class="col s6"><div class="card"><div class="card-image"><img class="responsive-img poster" src="'+discoverImage+''+discover[i].backdrop_path+'" /><span class="card-title">'+discover[i].title+'</span></div></div></div>';
       };
       $('.content').html(discoverContent);
     })
   })
+
+  $('#add').on('click', function(e){
+    e.preventDefault();
+    page = page+1;
+    discoverUrl = 'https://api.themoviedb.org/3/discover/movie?api_key=3729ffa22dfa780e9abb43dee3074695&page='+page;
+
+    $.getJSON(discoverUrl,function(data){
+      discover = data.results;
+
+      for (var i = 0; i < discover.length; i++) {
+         
+        discoverContent+= '<div class="col s6"><div class="card"><div class="card-image"><img class="responsive-img poster" src="'+discoverImage+''+discover[i].backdrop_path+'" /><span class="card-title">'+discover[i].title+'</span></div></div></div>';
+      };
+      $('.content').html(discoverContent);
+
+
+  })
+
+})
 }
 discoverContent();
+
+
+
+
 
 });

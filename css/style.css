@@ -1,6 +1,6 @@
 img.responsive-img.poster{
-  width: 220px;
-  height:325px;
+ max-width:100%;
+max-height:100%;
 }
 
 tbody.image {
@@ -18,4 +18,12 @@ tbody.image {
 
 .navwrapper{
   padding-right: 20px;
+}
+
+span.card-title{
+  display: block;
+}
+
+#next-arrow{
+  text-align: right;
 }
