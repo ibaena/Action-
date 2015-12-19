@@ -1,7 +1,7 @@
 $(document).ready(function(){
 $(".dropdown-button").dropdown();
-var discoverImage = 'http://image.tmdb.org/t/p/w500';
-var m
+var discoverImage = 'https://image.tmdb.org/t/p/w500';
+
 
 
 //tmdb
