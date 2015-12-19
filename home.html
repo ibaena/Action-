@@ -2,27 +2,25 @@
 <html>
 <head>
   <title>Action!</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
   <link rel="stylesheet" type="text/css" href="css/style.css">
 
 </head>
 <body>
 <ul id="dropdown1" class="dropdown-content">
-  <li><a href="#!">Search by Genre</a></li>
-  <li><a href="#!">Search by Actor</a></li>
-  <li class="divider"></li>
-  <li><a href="#!">Search by Country of Origin</a></li>
 </ul>
  <nav>
 
     <div class="nav-wrapper color black">
-      <a href="#" class="brand-logo center">Action-</a>
-      <ul id="nav-mobile" class="left hide-on-med-and-down">
-      <li><a href="sass.html"><img src="http://friendorphins.com/graphics/movie_logo-tm.jpg" height="60" width="70" id="searchImg"></a></li>
-      <li><a href="sass.html" id="searchGenre">Genre</a></li>
-        <li><a href="badges.html" id="searchActor">Actor</a></li>
-        <li><a href="collapsible.html">Country</a></li>
-        <li><a class="dropdown-button" id="searchDropdown" href="#!" data-activates="dropdown1">Dropdown-<i class="material-icons right"></i></a></li>
+      <ul class="right hide-on-med-and-down">
+        <li><a class="" id="searchDropdown" href="#!">Popular<i class="material-icons right">arrow_drop_down</i></a></li>
+      </ul>
+      <ul class="right hide-on-med-and-down">
+        <li><a class="" id="release" href="#!">In Theatres<i class="material-icons right">arrow_drop_down</i></a></li>
+      </ul>
+      <ul class="right hide-on-med-and-down">
+        <li><a class="" id="discover" href="#!">Discover<i class="material-icons right">arrow_drop_down</i></a></li>
       </ul>
     </div>
   </nav>
@@ -30,14 +28,19 @@
 <div class="container">
 <div class="row">
   <div class="input-field col s12">
-    <input placeholder="Enter a Movie Title" id="search-input" type="text">
+    <input placeholder="Movie, Tv Show, or Actor" id="search-input" type="text">
     <label for="search-input">Search</label>
   </div>
   </div>
  <div class="row content">
-   
  </div>
 
+  <div class="row">
+    <div class="col s10 offset-s1 right-align" id="previous-btn">
+    </div>
+    <div class="col s1 left-align" id="next-btn">
+    </div>
+  </div>
  
 
 <div class="footer">
