@@ -8,7 +8,7 @@ var m
 function tmdbApi(){
   $('#search-input').keypress(function(e){
       var input = $('#search-input').val();
-      var plotUrl= 'http://api.themoviedb.org/3/search/multi?api_key=3729ffa22dfa780e9abb43dee3074695&query='+input;
+      var plotUrl= 'https://api.themoviedb.org/3/search/multi?api_key=3729ffa22dfa780e9abb43dee3074695&query='+input;
       var movie;
       var grid = " ";
 
