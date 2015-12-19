@@ -12,12 +12,9 @@ function tmdbApi(){
       var movie;
       var grid = " ";
 
-
     if(e.which == 13) {
     $.getJSON(plotUrl, function(data){
       movie = data.results;
-
-      
 
       for (var i = 0; i < movie.length; i++) {
         grid+='<div class="col s6"><div class="card"><div class="card-image"><img class="responsive-img poster" src="'+discoverImage+''+movie[i].backdrop_path+'" /><span class="card-title">'+movie[i].title+'</span></div></div></div>';
@@ -25,8 +22,7 @@ function tmdbApi(){
       };
 
       $('.content').html(grid);
-
-      
+  
     })
 }
   })
@@ -43,11 +39,11 @@ function popularList(){
   $('#searchDropdown').on('click', function(){
 
     $.getJSON(genreList, function(data){
-      console.log('data');
+      //console.log('data');
       genre = data.results;
 
       for (var i = 0; i < genre.length; i++) {
-        console.log(genre[i].name);
+        //console.log(genre[i].name);
         genreContent += '<div class="col s6"><div class="card"><div class="card-image"><img class="responsive-img poster" src="'+discoverImage+''+genre[i].backdrop_path+'" /><span class="card-title">'+genre[i].title+'</span></div></div></div>';
       };
       $('.content').html(genreContent);
@@ -102,10 +98,12 @@ function discoverContent(){
         discoverContent+= '<div class="col s6"><div class="card"><div class="card-image"><img class="responsive-img poster" src="'+discoverImage+''+discover[i].backdrop_path+'" /><span class="card-title">'+discover[i].title+'</span></div></div></div>';
       };
       $('.content').html(discoverContent);
+      $('#previous-btn').html('<a class="waves-effect waves-black btn-flat" id="back"><i class="material-icons">skip_previous</i></a>');
+      $('#next-btn').html('<a class="waves-effect waves-black btn-flat" id="add"><i class="material-icons">skip_next</i></a>')
     })
   })
-
-  $('#add').on('click', function(e){
+//next page
+  $('#next-btn').on('click','#add', function(e){
     e.preventDefault();
     page = page+1;
     discoverUrl = 'https://api.themoviedb.org/3/discover/movie?api_key=3729ffa22dfa780e9abb43dee3074695&page='+page;
@@ -121,6 +119,24 @@ function discoverContent(){
 
 
   })
+
+})
+//Previous Button
+$('#previous-btn').on('click','#back', function(e){
+    e.preventDefault();
+    page = page-1;
+
+    discoverUrl = 'https://api.themoviedb.org/3/discover/movie?api_key=3729ffa22dfa780e9abb43dee3074695&page='+page;
+
+    $.getJSON(discoverUrl,function(data){
+      discover = data.results;
+
+      for (var i = 0; i < discover.length; i++) {
+         
+        discoverContent+= '<div class="col s6"><div class="card"><div class="card-image"><img class="responsive-img poster" src="'+discoverImage+''+discover[i].backdrop_path+'" /><span class="card-title">'+discover[i].title+'</span></div></div></div>';
+      };
+      $('.content').html(discoverContent);
+    })
 
 })
 }
