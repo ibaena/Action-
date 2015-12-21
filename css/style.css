@@ -37,3 +37,7 @@ span.card-title{
   main{
     flex: 1 0 auto;
   }
+
+#next-btn{
+  padding-right: 50px;
+}
