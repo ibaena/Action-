@@ -28,6 +28,10 @@ span.card-title{
   text-align: right;
 }
 
+.tv-plot{
+  text-overflow: ellipsis;
+}
+
   body {
     display: flex;
     min-height: 100vh;
@@ -38,3 +42,14 @@ span.card-title{
     flex: 1 0 auto;
   }
 
+
+
+.tv-plot, .release-date{
+  font-size: 16px;
+  text-align: left;
+  padding-left: 5px;
+}
+
+p.card-title{
+  display: inline;
+}
