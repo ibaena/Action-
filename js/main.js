@@ -4,13 +4,15 @@ var releaseContent = " ";
 var genreContent = " ";
 var tvList = " ";
 var discoverImage = 'https://image.tmdb.org/t/p/w500';
+var tvGlist;
 
 $(document).ready(function() {
 
-//Load Genre List
-   
-
-
+  $( ".poster" )
+  .error(function() {
+    $( this ).attr( "src", "replacement.png" );
+  })
+  .attr( "src", "missing.png" );
 
 
   //tmdb
@@ -43,12 +45,15 @@ $(document).ready(function() {
 
   //Will Pull Lst of Popular tv shows to go though
   function televisonList() {
-    var genreList = 'https://api.themoviedb.org/3/discover/tv?api_key=3729ffa22dfa780e9abb43dee3074695&sort_by=popularity.desc&with_genre=&page='
+    var genreList = 'https://api.themoviedb.org/3/discover/tv?api_key=3729ffa22dfa780e9abb43dee3074695&sort_by=popularity.desc&with_genre=&page=&append_to_response=similar_tv,genres,&language=DE'
     var page = 1;
     var genre;
     var genreMinfo = " ";
 
     $('#searchDropdown').on('click', function() {
+      $('.poster').error(function(){
+        $(this).attr('src', 'images/insta.png');
+});
 
       $.getJSON(genreList, function(data) {
         //console.log('data');
@@ -64,14 +69,8 @@ $(document).ready(function() {
                                 <div class="card-image"><img class="responsive-img poster" src="' + discoverImage + '' + genre[i].backdrop_path + '" />\
                                 </div>\
                               </div>\
-                              <div>\
                                   <p class="card-title">' + genre[i].name +'</p>\
                                   <span class="tv-plot right align">'+genre[i].vote_average+'<i class="tiny material-icons">grade</i></span>\
-                              </div>\
-                              <div>\
-                                  <p class="card-title">' + genre[i].genre_ids+'</p>\
-                                  <span class="tv-plot right align">'+genre[i].first_air_date+'<i class="tiny material-icons">grade</i></span>\
-                              </div>\
                           </div>';
         
         }
@@ -94,13 +93,13 @@ $(document).ready(function() {
 
         for (var i = 0; i < genre.length; i++) {
 
-           genreContent += '<div class="col s6">\
+            genreContent += '<div class="col s6">\
                               <div class="card">\
                                 <div class="card-image"><img class="responsive-img poster" src="' + discoverImage + '' + genre[i].backdrop_path + '" />\
                                 </div>\
-                                <span class="card-title">' + genre[i].name +'</span>\
-                                <span class="tv-plot">'+genre[i].vote_average+'<i class="tiny material-icons">grade</i></span>\
                               </div>\
+                                  <p class="card-title">' + genre[i].name +'</p>\
+                                  <span class="tv-plot right align">'+genre[i].vote_average+'<i class="tiny material-icons">grade</i></span>\
                           </div>';
         }
         $('.content').html(genreContent).hide().fadeIn(400);
@@ -126,9 +125,9 @@ $(document).ready(function() {
                               <div class="card">\
                                 <div class="card-image"><img class="responsive-img poster" src="' + discoverImage + '' + genre[i].backdrop_path + '" />\
                                 </div>\
-                                <span class="card-title">' + genre[i].name +'</span>\
-                                <span class="tv-plot">'+genre[i].vote_average+'<i class="tiny material-icons">grade</i></span>\
                               </div>\
+                                  <p class="card-title">' + genre[i].name +'</p>\
+                                  <span class="tv-plot right align">'+genre[i].vote_average+'<i class="tiny material-icons">grade</i></span>\
                           </div>';
         }
         $('.content').html(genreContent).hide().fadeIn(400);

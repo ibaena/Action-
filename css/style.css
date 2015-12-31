@@ -53,3 +53,7 @@ span.card-title{
 p.card-title{
   display: inline;
 }
+
+p.card-plot{
+  display: inline;
+}
