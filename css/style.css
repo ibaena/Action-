@@ -1,6 +1,6 @@
-img.responsive-img{
-  width: 220px;
-  height:325px;
+img.responsive-img.poster{
+ max-width:100%;
+max-height:100%;
 }
 
 tbody.image {
@@ -14,4 +14,46 @@ tbody.image {
 .footer {
   background-color: #000;
   color: white;
+}
+
+.navwrapper{
+  padding-right: 20px;
+}
+
+span.card-title{
+  display: block;
+}
+
+#next-arrow{
+  text-align: right;
+}
+
+.tv-plot{
+  text-overflow: ellipsis;
+}
+
+  body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main{
+    flex: 1 0 auto;
+  }
+
+
+
+.tv-plot, .release-date{
+  font-size: 16px;
+  text-align: left;
+  padding-left: 5px;
+}
+
+p.card-title{
+  display: inline;
+}
+
+p.card-plot{
+  display: inline;
 }

@@ -1,4 +1,3 @@
-
 var discoverContent;
 var releaseContent = " ";
 var genreContent = " ";
@@ -236,4 +235,3 @@ $(document).ready(function() {
 
 
 });
-
