@@ -9,12 +9,19 @@
 
 </head>
 <body>
+<ul id="dropdown1" class="dropdown-content">
+  <li><a href="#!">one</a></li>
+  <li><a href="#!">two</a></li>
+  <li class="divider"></li>
+  <li><a href="#!">three</a></li>
+</ul>
  <nav>
   <div class="nav-wrapper color black">
-    <ul class="right hide-on-med-and-down">
-      <li><a class="" id="searchDropdown" href="#!">Televison<i class="material-icons right">arrow_drop_down</i></a></li>
-
-    </ul>
+    <ul id="slide-out" class="side-nav">
+        <li><a href="#!" id="top-tv">Top Rated</a></li>
+        <li><a href="#!" id="popular-tv">Popular</a></li>
+      </ul>
+    <a href="#" data-activates="slide-out" class="button-collapse show-on-large right hide-on-med-and-down" id="searchDropdown">Televison<i class="material-icons right">arrow_drop_down</i></a>
       <ul class="right hide-on-med-and-down">
         <li><a class="" id="release" href="#!">In Theatres<i class="material-icons right">arrow_drop_down</i></a></li>
       </ul>
