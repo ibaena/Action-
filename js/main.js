@@ -1,69 +1,198 @@
 
-var discoverContent;
+var discoverContent = " ";
 var releaseContent = " ";
 var genreContent = " ";
 var popularContent = " ";
 var tvList = " ";
-var discoverImage = 'https://image.tmdb.org/t/p/w500';
+var tvGenre;
+var imageUrl = 'https://image.tmdb.org/t/p/w500';
+
+
 
 $(document).ready(function() {
+//Side nav initialiazed
   $(".button-collapse").sideNav();
-
-//enables coallpasible for plot descriptions
-$('.content').on('click','.collapsible-header',function(){
-$('.collapsible').collapsible({
+//collapasible for plot descriptions initialized
+  $('.content').on('click','.collapsible-header',function(){
+  $('.collapsible').collapsible({
       accordion : false 
     });
 });
 
-  //tmdb
+//Search Engine user can input movie name, actor, or tv show name. Results will return title, rating, image , and plot.
   function tmdbApi() {
     $('#search-input').keypress(function(e) {
       var input = $('#search-input').val();
       var plotUrl = 'https://api.themoviedb.org/3/search/multi?api_key=3729ffa22dfa780e9abb43dee3074695&query=' + input;
 
-      var movie;
+      var searchEngine;
       var grid = " ";
 
       if (e.which == 13) {
         $.getJSON(plotUrl, function(data) {
-          movie = data.results;
+          searchEngine = data.results;
 
-          for (var i = 0; i < movie.length; i++) {
-            grid += '<div class="col s6">\
-                              <div class="card">\
-                                <div class="card-image">\
-                                  <img class="responsive-img poster" src="' + discoverImage + '' + movie[i].backdrop_path + '" />\
-                                </div>\
-                              </div>\
-                                <ul class="collapsible" data-collapsible="accordion">\
-                                  <li>\
-                                    <div class="collapsible-header">' + movie[i].name +' <span class="tv-plot right align">'+movie[i].vote_average+'<i class="tiny material-icons">grade</i></span></div>\
-                                    <div class="collapsible-body">\
-                                      <p>'+movie[i].overview+'</p>\
-                                      <p>'+movie[i].genre_ids+'</p>\
-                                    </div>\
-                                  </li>\
-                                </ul>\
-                          </div>';
-            //console.log(movie[i]);
+          for (var i = 0; i < searchEngine.length; i++) {
+            if(searchEngine[i].name !== undefined){
+               grid +='<div class="col s6">\
+                      <div class="card">\
+                        <div class="card-image">\
+                          <img class="responsive-img poster" src="' + imageUrl + '' + searchEngine[i].backdrop_path + '" />\
+                        </div>\
+                      </div>\
+                        <ul class="collapsible" data-collapsible="accordion">\
+                          <li>\
+                            <div class="collapsible-header">' + searchEngine[i].name +'<span class="tv-plot right align">'+searchEngine[i].vote_average+'<i class="tiny material-icons">grade</i></span>\
+                            </div>\
+                            <div class="collapsible-body">\
+                              <p>'+searchEngine[i].overview+'</p>\
+                              <p>'+searchEngine[i].genre_ids+'</p>\
+                            </div>\
+                          </li>\
+                        </ul>\
+                    </div>';
+              //console.log(searchEngine[i]);
+            }
+            else{
+               grid +='<div class="col s6">\
+                      <div class="card">\
+                        <div class="card-image">\
+                          <img class="responsive-img poster" src="' + imageUrl + '' + searchEngine[i].backdrop_path + '" />\
+                        </div>\
+                      </div>\
+                        <ul class="collapsible" data-collapsible="accordion">\
+                          <li>\
+                            <div class="collapsible-header">' + searchEngine[i].title +'<span class="tv-plot right align">'+searchEngine[i].vote_average+'<i class="tiny material-icons">grade</i></span>\
+                            </div>\
+                            <div class="collapsible-body">\
+                              <p>'+searchEngine[i].overview+'</p>\
+                              <p>'+searchEngine[i].genre_ids+'</p>\
+                            </div>\
+                          </li>\
+                        </ul>\
+                    </div>';
+
+            }
           }
 
-          $('.content').html(grid).hide().fadeIn(400);;
+          $('.content').html(grid).hide().fadeIn(400);
 
         });
       }
     });
-
   }
   tmdbApi();
 
-  /*tv Genre List reference
-     $.getJSON('https://api.themoviedb.org/3/genre/tv/list?api_key=3729ffa22dfa780e9abb43dee3074695', function(data){
-            var names =  data.genres;
-            console.log(names)
+//Building Television Genre List in sideNav, implmenting a on click event on genre names that will load a list of movies based on their genre 
+function buildTvGenrelist(){
+  $.getJSON('https://api.themoviedb.org/3/genre/tv/list?api_key=3729ffa22dfa780e9abb43dee3074695', function(data){
+    var names =  data.genres;
+    var page = 1;
+    console.log(names)
+    for (var i = 0; i < names.length; i++) {
+      tvGenre += '<li><a href="#" class="genre-tv" value ="'+names[i].id+'">'+names[i].name+'</a></li>';
+    };
+    $('.side-nav').append(tvGenre);
+    $('.genre-tv').on('click',function(){
+      var genreId = $(this).attr("value");
+       $.getJSON('https://api.themoviedb.org/3/discover/tv?api_key=3729ffa22dfa780e9abb43dee3074695&with_genres='+genreId,function(data){
+        var sortTv = data.results;
+        $('.content').html(' ');
+         for (var i = 0; i < sortTv.length; i++) {
+        //console.log(genre[i].name);
 
-           });*/
+        tvList += '<div class="col s6">\
+                      <div class="card">\
+                        <div class="card-image">\
+                          <img class="responsive-img poster" src="' + discoverImage + '' + sortTv[i].backdrop_path + '" />\
+                        </div>\
+                      </div>\
+                      <ul class="collapsible" data-collapsible="accordion">\
+                        <li>\
+                            <div class="collapsible-header">' + sortTv[i].name + ' <span class="tv-plot right align">' + sortTv[i].vote_average + '<i class="tiny material-icons">grade</i></span></div>\
+                              <div class="collapsible-body">\
+                                <p>' + sortTv[i].overview + '</p>\
+                                <p>' + sortTv[i].genre_ids + '</p>\
+                              </div>\
+                        </li>\
+                    </ul>\
+                  </div>';
+      
+      }
+      $('.content').html(tvList).hide().fadeIn(400);
+      $('#previous-btn').html('<a class="waves-effect waves-black btn-flat" id="genrepages-backbtn"><i class="material-icons">skip_previous</i></a>');
+      $('#next-btn').html('<a class="waves-effect waves-black btn-flat" id="genrepages-addbtn"><i class="material-icons">skip_next</i></a>');
+      
+
+        
+
+      });
+   
+//next page
+              $('#next-btn').on('click', '#genrepages-addbtn', function(e) {
+                e.preventDefault();
+                page = page + 1;
+                var tvGenre = 'https://api.themoviedb.org/3/discover/tv?api_key=3729ffa22dfa780e9abb43dee3074695&page='+page+'&with_genres=' + genreId;
+
+                $.getJSON(tvGenre, function(data) {
+                  sortTv = data.results;
+
+                  for (var i = 0; i < sortTv.length; i++) {
+
+                    tvList += '<div class="col s6">\
+                              <div class="card">\
+                                <div class="card-image">\
+                                  <img class="responsive-img poster" src="' + discoverImage + '' + sortTv[i].backdrop_path + '" />\
+                                </div>\
+                              </div>\
+                                <ul class="collapsible" data-collapsible="accordion">\
+                                  <li>\
+                                    <div class="collapsible-header">' + sortTv[i].name + ' <span class="tv-plot right align">' + sortTv[i].vote_average + '<i class="tiny material-icons">grade</i></span></div>\
+                                    <div class="collapsible-body"><p>' + sortTv[i].overview + '</p></div>\
+                                  </li>\
+                                </ul>\
+                          </div>';
+                  }
+                  $('.content').html(tvList).hide().fadeIn(400);
+
+
+                });
+
+              });
+              //Previous Button
+              $('#previous-btn').on('click', '#genrepages-backbtn', function(e) {
+                e.preventDefault();
+                page = page + 1;
+                genreContent = " ";
+
+                tvGenre = 'https://api.themoviedb.org/3/discover/tv?api_key=3729ffa22dfa780e9abb43dee3074695&page='+page+'&with_genres=' + genreId;
+
+                $.getJSON(tvGenre, function(data) {
+                  genre = data.results;
+
+                  for (var i = 0; i < genre.length; i++) {
+
+                    tvList += '<div class="col s6">\
+                              <div class="card">\
+                                <div class="card-image">\
+                                  <img class="responsive-img poster" src="' + discoverImage + '' + sortTv[i].backdrop_path + '" />\
+                                </div>\
+                              </div>\
+                                <ul class="collapsible" data-collapsible="accordion">\
+                                  <li>\
+                                    <div class="collapsible-header">' + sortTv[i].name + ' <span class="tv-plot right align">' + sortTv[i].vote_average + '<i class="tiny material-icons">grade</i></span></div>\
+                                    <div class="collapsible-body"><p>' + sortTv[i].overview + '</p></div>\
+                                  </li>\
+                                </ul>\
+                          </div>';
+                  }
+                  $('.content').html(tvList).hide().fadeIn(400);
+                   })
+                });
+ });
+});
+}
+   buildTvGenrelist();
 
 //Will Pull Lst of top rated tv shows to go though
 function topRatedtelevison() {
@@ -73,6 +202,7 @@ function topRatedtelevison() {
   var genreMinfo = " ";
 
   $('#top-tv').on('click', function() {
+    genreList = 'https://api.themoviedb.org/3/tv/top_rated?api_key=3729ffa22dfa780e9abb43dee3074695';
     $.getJSON(genreList, function(data) {
       genre = data.results;
       //console.log(genre);
@@ -96,9 +226,8 @@ function topRatedtelevison() {
                                   </li>\
                                 </ul>\
                           </div>';
+                           $('.content').html(genreContent).hide().fadeIn(400);
       }
-
-      $('.content').html(genreContent).hide().fadeIn(400);
       $('#previous-btn').html('<a class="waves-effect waves-black btn-flat" id="toprated-backbtn"><i class="material-icons">skip_previous</i></a>');
       $('#next-btn').html('<a class="waves-effect waves-black btn-flat" id="toprated-addbtn"><i class="material-icons">skip_next</i></a>');
 
@@ -173,7 +302,7 @@ function topRatedtelevison() {
 }
 topRatedtelevison();
 
-//Will Pull Lst of Popular tv shows to go though
+//Generating A list of Popular Television shows
 function popularTelevison() {
   var popularList = 'https://api.themoviedb.org/3/tv/popular?api_key=3729ffa22dfa780e9abb43dee3074695&page=';
   var page = 1;
