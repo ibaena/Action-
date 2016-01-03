@@ -20,7 +20,7 @@ $(document).ready(function() {
 });
 
 //Search Engine user can input movie name, actor, or tv show name. Results will return title, rating, image , and plot.
-  function tmdbApi() {
+  function searchItems() {
     $('#search-input').keypress(function(e) {
       var input = $('#search-input').val();
       var plotUrl = 'https://api.themoviedb.org/3/search/multi?api_key=3729ffa22dfa780e9abb43dee3074695&query=' + input;
@@ -33,13 +33,17 @@ $(document).ready(function() {
           searchEngine = data.results;
 
           for (var i = 0; i < searchEngine.length; i++) {
+            if(searchEngine[i].backdrop_path === null||error){
+              imageUrl = '';
+              searchEngine[i].backdrop_path = 'images/no-poster.png';
+            }
             if(searchEngine[i].name !== undefined){
                grid +='<div class="col s6">\
-                      <div class="card">\
-                        <div class="card-image">\
-                          <img class="responsive-img poster" src="' + imageUrl + '' + searchEngine[i].backdrop_path + '" />\
+                        <div class="card">\
+                          <div class="card-image">\
+                            <img class="responsive-img poster" src="'+searchEngine[i].backdrop_path +'" />\
+                          </div>\
                         </div>\
-                      </div>\
                         <ul class="collapsible" data-collapsible="accordion">\
                           <li>\
                             <div class="collapsible-header">' + searchEngine[i].name +'<span class="tv-plot right align">'+searchEngine[i].vote_average+'<i class="tiny material-icons">grade</i></span>\
@@ -51,15 +55,15 @@ $(document).ready(function() {
                           </li>\
                         </ul>\
                     </div>';
-              //console.log(searchEngine[i]);
+              console.log(searchEngine[i]);
             }
             else{
                grid +='<div class="col s6">\
-                      <div class="card">\
-                        <div class="card-image">\
-                          <img class="responsive-img poster" src="' + imageUrl + '' + searchEngine[i].backdrop_path + '" />\
+                        <div class="card">\
+                          <div class="card-image">\
+                            <img class="responsive-img poster" src="' + imageUrl + '' + searchEngine[i].backdrop_path + '" />\
+                          </div>\
                         </div>\
-                      </div>\
                         <ul class="collapsible" data-collapsible="accordion">\
                           <li>\
                             <div class="collapsible-header">' + searchEngine[i].title +'<span class="tv-plot right align">'+searchEngine[i].vote_average+'<i class="tiny material-icons">grade</i></span>\
@@ -70,18 +74,15 @@ $(document).ready(function() {
                             </div>\
                           </li>\
                         </ul>\
-                    </div>';
-
+                      </div>';
             }
           }
-
           $('.content').html(grid).hide().fadeIn(400);
-
         });
       }
     });
   }
-  tmdbApi();
+  searchItems();
 
 //Building Television Genre List in sideNav, implmenting a on click event on genre names that will load a list of movies based on their genre 
 function buildTvGenrelist(){
@@ -93,7 +94,8 @@ function buildTvGenrelist(){
       tvGenre += '<li><a href="#" class="genre-tv" value ="'+names[i].id+'">'+names[i].name+'</a></li>';
     };
     $('.side-nav').append(tvGenre);
-    $('.genre-tv').on('click',function(){
+    $('.genre-tv').on('click',function(click){
+      click.preventDefault();
       var genreId = $(this).attr("value");
        $.getJSON('https://api.themoviedb.org/3/discover/tv?api_key=3729ffa22dfa780e9abb43dee3074695&with_genres='+genreId,function(data){
         var sortTv = data.results;
@@ -104,7 +106,7 @@ function buildTvGenrelist(){
         tvList += '<div class="col s6">\
                       <div class="card">\
                         <div class="card-image">\
-                          <img class="responsive-img poster" src="' + discoverImage + '' + sortTv[i].backdrop_path + '" />\
+                          <img class="responsive-img poster" src="' + imageUrl + '' + sortTv[i].backdrop_path + '" />\
                         </div>\
                       </div>\
                       <ul class="collapsible" data-collapsible="accordion">\
