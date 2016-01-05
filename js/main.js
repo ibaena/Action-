@@ -18,11 +18,11 @@ var page = 1;
 $(document).ready(function() {
   //Side nav initialiazed
   $("#searchDropdown").sideNav();
-  $("#slide-out").on('click','.genre-tv,#popular-tv, #top-tv',function(){
+  $("#slide-out").on('click', '.genre-tv,#popular-tv, #top-tv', function() {
     $("#searchDropdown").sideNav('hide');
   });
   $("#movies").sideNav();
-  $("#slide-out1").on('click','.genre-movie,#popular-movie, #top-movie',function(){
+  $("#slide-out1").on('click', '.genre-movie,#popular-movie, #top-movie', function() {
     $("#searchDropdown").sideNav('hide');
   });
   //collapasible for plot descriptions initialized
@@ -234,9 +234,9 @@ $(document).ready(function() {
 
         for (var i = 0; i < genre.length; i++) {
           if (genre[i].backdrop_path === null) {
-              imageUrl = '';
-              genre[i].backdrop_path = 'images/no-poster.png';
-            }  
+            imageUrl = '';
+            genre[i].backdrop_path = 'images/no-poster.png';
+          }
 
           genreContent += '<div class="col s6">\
                               <div class="card">\
@@ -277,9 +277,9 @@ $(document).ready(function() {
 
         for (var i = 0; i < genre.length; i++) {
           if (genre[i].backdrop_path === null) {
-              imageUrl = '';
-              genre[i].backdrop_path = 'images/no-poster.png';
-            }  
+            imageUrl = '';
+            genre[i].backdrop_path = 'images/no-poster.png';
+          }
 
           genreContent += '<div class="col s6">\
                               <div class="card">\
@@ -317,9 +317,9 @@ $(document).ready(function() {
 
         for (var i = 0; i < genre.length; i++) {
           if (genre[i].backdrop_path === null) {
-              imageUrl = '';
-              genre[i].backdrop_path = 'images/no-poster.png';
-            }  
+            imageUrl = '';
+            genre[i].backdrop_path = 'images/no-poster.png';
+          }
 
           genreContent += '<div class="col s6">\
                               <div class="card">\
@@ -359,9 +359,9 @@ $(document).ready(function() {
 
         for (var i = 0; i < popular.length; i++) {
           if (popular[i].backdrop_path === null) {
-              imageUrl;
-              popular[i].backdrop_path = 'images/no-poster.png';
-            }  
+            imageUrl;
+            popular[i].backdrop_path = 'images/no-poster.png';
+          }
 
           popularContent += '<div class="col s6">\
                               <div class="card">\
@@ -400,9 +400,9 @@ $(document).ready(function() {
 
         for (var i = 0; i < popular.length; i++) {
           if (popular[i].backdrop_path === null) {
-              imageUrl = '';
-              popular[i].backdrop_path = 'images/no-poster.png';
-            }  
+            imageUrl = '';
+            popular[i].backdrop_path = 'images/no-poster.png';
+          }
 
           popularContent += '<div class="col s6">\
                               <div class="card">\
@@ -430,7 +430,7 @@ $(document).ready(function() {
     //Previous Button
     $('#previous-btn').on('click', '#popular-backbtn', function(e) {
       e.preventDefault();
-     page = page + 1;
+      page = page + 1;
       popularList = 'https://api.themoviedb.org/3/tv/popular?api_key=3729ffa22dfa780e9abb43dee3074695&page=' + page;
       popularContent = " "
 
@@ -439,9 +439,9 @@ $(document).ready(function() {
 
         for (var i = 0; i < popular.length; i++) {
           if (popular[i].backdrop_path === null) {
-              imageUrl = '';
-              popular[i].backdrop_path = 'images/no-poster.png';
-            }  
+            imageUrl = '';
+            popular[i].backdrop_path = 'images/no-poster.png';
+          }
 
           popularContent += '<div class="col s6">\
                               <div class="card">\
@@ -459,7 +459,7 @@ $(document).ready(function() {
                                 </div>\
                               </div>\
                           </div>';
-                        }
+        }
         $('.content').html(popularContent).hide().fadeIn(400);
 
 
@@ -658,7 +658,7 @@ $(document).ready(function() {
                                 </div>\
                               </div>\
                           </div>';
-          }
+        }
         $('.content').html(popMovieContent).hide().fadeIn(400);
         $('#previous-btn').html('<a class="waves-effect waves-black btn-flat" id="popmovie-backbtn"><i class="material-icons">skip_previous</i></a>');
         $('#next-btn').html('<a class="waves-effect waves-black btn-flat" id="popmovie-addbtn"><i class="material-icons">skip_next</i></a>');
@@ -786,7 +786,7 @@ $(document).ready(function() {
       page = page + 1;
       topMovieList = 'https://api.themoviedb.org/3/movie/top_rated?api_key=3729ffa22dfa780e9abb43dee3074695&page=';
 
-      $.getJSON(topMovieList + page, function(data) {
+      $.getJSON(topMovieList, function(data) {
         topMovie = data.results;
         topMovieContent = " ";
 
@@ -836,7 +836,7 @@ $(document).ready(function() {
                                   <span class="card-title activator grey-text text-darken-4 flow-text">' + topMovie[i].title + '<span class="tv-plot right align">' + topMovie[i].vote_average + '<i class="tiny material-icons">grade</i></span></span>\
                                 </div>\
                                   <div class="card-reveal">\
-                                    <span class="card-title activator grey-text text-darken-4 flow-text">' + topMovie[i].title + '<i class="material-icons right">close</i></span>\</span>\
+                                    <span class="card-title activator grey-text text-darken-4 flow-text reveal">' + topMovie[i].title + '<i class="material-icons right">close</i></span>\</span>\
                                       <p class="plot">' + topMovie[i].overview + '</p>\
                                       <p class="rating">IMDB rating: ' + topMovie[i].vote_average + '</p>\
                                     </div>\
@@ -851,6 +851,9 @@ $(document).ready(function() {
 
   }
   topMoviesBuilder();
+
+
+
 
 
 
