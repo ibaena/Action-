@@ -5,7 +5,12 @@ var genreContent = " ";
 var popularContent = " ";
 var tvList = " ";
 var tvGenre;
+var movieGenre;
 var imageUrl = 'https://image.tmdb.org/t/p/w500';
+var genreTvUrl = 'https://api.themoviedb.org/3/genre/tv/list?api_key=3729ffa22dfa780e9abb43dee3074695';
+var tvGenreList = 'https://api.themoviedb.org/3/discover/tv?api_key=3729ffa22dfa780e9abb43dee3074695&with_genres=';
+var genreMovieUrl = 'https://api.themoviedb.org/3/genre/movie/list?api_key=3729ffa22dfa780e9abb43dee3074695'
+var movieGenreList = 'https://api.themoviedb.org/3/discover/movie?api_key=3729ffa22dfa780e9abb43dee3074695&with_genres='
 
 
 
@@ -33,7 +38,7 @@ $(document).ready(function() {
           searchEngine = data.results;
 
           for (var i = 0; i < searchEngine.length; i++) {
-            if(searchEngine[i].backdrop_path === null||error){
+            if(searchEngine[i].backdrop_path === null){
               imageUrl = '';
               searchEngine[i].backdrop_path = 'images/no-poster.png';
             }
@@ -86,24 +91,25 @@ $(document).ready(function() {
 
 //Building Television Genre List in sideNav, implmenting a on click event on genre names that will load a list of movies based on their genre 
 function buildTvGenrelist(){
-  $.getJSON('https://api.themoviedb.org/3/genre/tv/list?api_key=3729ffa22dfa780e9abb43dee3074695', function(data){
-    var names =  data.genres;
+  $.getJSON(genreTvUrl, function(data){
+    var genreNames =  data.genres;
     var page = 1;
-    console.log(names)
-    for (var i = 0; i < names.length; i++) {
-      tvGenre += '<li><a href="#" class="genre-tv" value ="'+names[i].id+'">'+names[i].name+'</a></li>';
-    };
-    $('.side-nav').append(tvGenre);
-    $('.genre-tv').on('click',function(click){
-      click.preventDefault();
-      var genreId = $(this).attr("value");
-       $.getJSON('https://api.themoviedb.org/3/discover/tv?api_key=3729ffa22dfa780e9abb43dee3074695&with_genres='+genreId,function(data){
+      for (var i = 0; i < genreNames.length; i++) {
+        tvGenre += '<li><a href="" class="genre-tv" value ='+genreNames[i].id+'>'+genreNames[i].name+'</a></li>';
+      };
+  $('.side-nav').append(tvGenre);
+  $('.genre-tv').on('click',function(e){
+    e.preventDefault();
+    var genreId = $(this).attr("value");
+      $.getJSON(tvGenreList+genreId,function(data){
         var sortTv = data.results;
-        $('.content').html(' ');
          for (var i = 0; i < sortTv.length; i++) {
-        //console.log(genre[i].name);
-
-        tvList += '<div class="col s6">\
+          if(sortTv[i].backdrop_path === null){
+              imageUrl = '';
+              sortTv[i].backdrop_path = 'images/no-poster.png';
+            }
+        //console.log(genre[i].name); 
+          tvList += '<div class="col s6">\
                       <div class="card">\
                         <div class="card-image">\
                           <img class="responsive-img poster" src="' + imageUrl + '' + sortTv[i].backdrop_path + '" />\
@@ -117,18 +123,14 @@ function buildTvGenrelist(){
                                 <p>' + sortTv[i].genre_ids + '</p>\
                               </div>\
                         </li>\
-                    </ul>\
-                  </div>';
-      
-      }
+                      </ul>\
+                    </div>';
+      };
       $('.content').html(tvList).hide().fadeIn(400);
       $('#previous-btn').html('<a class="waves-effect waves-black btn-flat" id="genrepages-backbtn"><i class="material-icons">skip_previous</i></a>');
       $('#next-btn').html('<a class="waves-effect waves-black btn-flat" id="genrepages-addbtn"><i class="material-icons">skip_next</i></a>');
       
-
-        
-
-      });
+});
    
 //next page
               $('#next-btn').on('click', '#genrepages-addbtn', function(e) {
@@ -140,11 +142,15 @@ function buildTvGenrelist(){
                   sortTv = data.results;
 
                   for (var i = 0; i < sortTv.length; i++) {
+                    if(sortTv[i].backdrop_path === null){
+                      imageUrl = '';
+                      searchEngine[i].backdrop_path = 'images/no-poster.png';
+                    }
 
                     tvList += '<div class="col s6">\
                               <div class="card">\
                                 <div class="card-image">\
-                                  <img class="responsive-img poster" src="' + discoverImage + '' + sortTv[i].backdrop_path + '" />\
+                                  <img class="responsive-img poster" src="' + imageUrl + '' + sortTv[i].backdrop_path + '" />\
                                 </div>\
                               </div>\
                                 <ul class="collapsible" data-collapsible="accordion">\
@@ -173,11 +179,15 @@ function buildTvGenrelist(){
                   genre = data.results;
 
                   for (var i = 0; i < genre.length; i++) {
+                    if(sortTv[i].backdrop_path === null){
+                      imageUrl = '';
+                      searchEngine[i].backdrop_path = 'images/no-poster.png';
+                    }
 
                     tvList += '<div class="col s6">\
                               <div class="card">\
                                 <div class="card-image">\
-                                  <img class="responsive-img poster" src="' + discoverImage + '' + sortTv[i].backdrop_path + '" />\
+                                  <img class="responsive-img poster" src="' + imageUrl+ '' + sortTv[i].backdrop_path + '" />\
                                 </div>\
                               </div>\
                                 <ul class="collapsible" data-collapsible="accordion">\
@@ -196,16 +206,16 @@ function buildTvGenrelist(){
 }
    buildTvGenrelist();
 
-//Will Pull Lst of top rated tv shows to go though
+//Will Pull Lst of top rated tv shows to go though listed in side nav
 function topRatedtelevison() {
-  var genreList = 'https://api.themoviedb.org/3/tv/top_rated?api_key=3729ffa22dfa780e9abb43dee3074695&page=';
+  var topRatedTvUrl = 'https://api.themoviedb.org/3/tv/top_rated?api_key=3729ffa22dfa780e9abb43dee3074695&page=';
   var page = 1;
   var genre;
   var genreMinfo = " ";
 
   $('#top-tv').on('click', function() {
     genreList = 'https://api.themoviedb.org/3/tv/top_rated?api_key=3729ffa22dfa780e9abb43dee3074695';
-    $.getJSON(genreList, function(data) {
+    $.getJSON(topRatedTvUrl, function(data) {
       genre = data.results;
       //console.log(genre);
 
@@ -215,7 +225,7 @@ function topRatedtelevison() {
         genreContent += '<div class="col s6">\
                               <div class="card">\
                                 <div class="card-image">\
-                                  <img class="responsive-img poster" src="' + discoverImage + '' + genre[i].backdrop_path + '" />\
+                                  <img class="responsive-img poster" src="' + imageUrl + '' + genre[i].backdrop_path + '" />\
                                 </div>\
                               </div>\
                                 <ul class="collapsible" data-collapsible="accordion">\
@@ -241,7 +251,7 @@ function topRatedtelevison() {
   $('#next-btn').on('click', '#toprated-addbtn', function(e) {
     e.preventDefault();
     page = page + 1;
-    genreList = 'https://api.themoviedb.org/3/tv/top_rated?api_key=3729ffa22dfa780e9abb43dee3074695&page=' + page;
+    var topRatedTvPageUrl = 'https://api.themoviedb.org/3/tv/top_rated?api_key=3729ffa22dfa780e9abb43dee3074695&page=' + page;
     genreContent = " "
 
     $.getJSON(genreList, function(data) {
@@ -252,7 +262,7 @@ function topRatedtelevison() {
         genreContent += '<div class="col s6">\
                               <div class="card">\
                                 <div class="card-image">\
-                                  <img class="responsive-img poster" src="' + discoverImage + '' + genre[i].backdrop_path + '" />\
+                                  <img class="responsive-img poster" src="' + imageUrl + '' + genre[i].backdrop_path + '" />\
                                 </div>\
                               </div>\
                                 <ul class="collapsible" data-collapsible="accordion">\
@@ -285,7 +295,7 @@ function topRatedtelevison() {
         genreContent += '<div class="col s6">\
                               <div class="card">\
                                 <div class="card-image">\
-                                  <img class="responsive-img poster" src="' + discoverImage + '' + genre[i].backdrop_path + '" />\
+                                  <img class="responsive-img poster" src="' + imageUrl + '' + genre[i].backdrop_path + '" />\
                                 </div>\
                               </div>\
                                 <ul class="collapsible" data-collapsible="accordion">\
@@ -321,7 +331,7 @@ function popularTelevison() {
         popularContent += '<div class="col s6">\
                               <div class="card">\
                                 <div class="card-image">\
-                                  <img class="responsive-img poster" src="' + discoverImage + '' + popular[i].backdrop_path + '" />\
+                                  <img class="responsive-img poster" src="' + imageUrl + '' + popular[i].backdrop_path + '" />\
                                 </div>\
                               </div>\
                                 <ul class="collapsible" data-collapsible="accordion">\
@@ -359,7 +369,7 @@ function popularTelevison() {
         genreContent += '<div class="col s6">\
                               <div class="card">\
                                 <div class="card-image">\
-                                  <img class="responsive-img poster" src="' + discoverImage + '' + genre[i].backdrop_path + '" />\
+                                  <img class="responsive-img poster" src="' + imageUrl + '' + genre[i].backdrop_path + '" />\
                                 </div>\
                               </div>\
                                 <ul class="collapsible" data-collapsible="accordion">\
@@ -392,7 +402,7 @@ function popularTelevison() {
         genreContent += '<div class="col s6">\
                               <div class="card">\
                                 <div class="card-image">\
-                                  <img class="responsive-img poster" src="' + discoverImage + '' + genre[i].backdrop_path + '" />\
+                                  <img class="responsive-img poster" src="' + imageUrl + '' + genre[i].backdrop_path + '" />\
                                 </div>\
                               </div>\
                                 <ul class="collapsible" data-collapsible="accordion">\
@@ -423,7 +433,19 @@ popularTelevison();
 
         for (var i = 0; i < release.length; i++) {
           //console.log(release[i].title);
-          releaseContent += '<div class="col s6"><div class="card"><div class="card-image"><img class="responsive-img poster" src="' + discoverImage + '' + release[i].backdrop_path + '" /><span class="card-title">' + release[i].title + '</span></div></div></div>';
+          releaseContent += '<div class="col s6">\
+                              <div class="card">\
+                                <div class="card-image">\
+                                  <img class="responsive-img poster" src="' + imageUrl + '' + release[i].backdrop_path + '" />\
+                                </div>\
+                              </div>\
+                                <ul class="collapsible" data-collapsible="accordion">\
+                                  <li>\
+                                    <div class="collapsible-header">' + release[i].title + ' <span class="tv-plot right align">' + release[i].vote_average + '<i class="tiny material-icons">grade</i></span></div>\
+                                    <div class="collapsible-body"><p>' + release[i].overview + '</p></div>\
+                                  </li>\
+                                </ul>\
+                          </div>';
         }
         $('.content').html(releaseContent).hide().fadeIn(400);
 
@@ -434,9 +456,17 @@ popularTelevison();
   }
   moviesOut();
 
-  //discover  Movie List generate
+  //Generate Movie Genre List in side nav and then add on click to load list of movies with desired genre
 
   function discoverContentCall() {
+    $.getJSON(genreMovieUrl, function(data){
+    var movieGenreNames =  data.genres;
+    var page = 1;
+      for (var i = 0; i < movieGenreNames.length; i++) {
+        tvGenre += '<li><a href="" class="genre-tv" value ='+movieGenreNames[i].id+'>'+movieGenreNames[i].name+'</a></li>';
+      };
+  $('.side-nav').append(tvGenre);
+
     var discoverUrl = 'https://api.themoviedb.org/3/discover/movie?api_key=3729ffa22dfa780e9abb43dee3074695&page=';
     var page = 1;
     var discover;
@@ -453,9 +483,9 @@ popularTelevison();
        
         for (var i = 0; i < discover.length; i++) {
           if (typeof(discoverContent) != 'undefined') {
-            discoverContent += '<div class="col s6"><div class="card"><div class="card-image"><img class="responsive-img poster" src="' + discoverImage + '' + discover[i].backdrop_path + '" /><span class="card-title">' + discover[i].title + '</span><p>Score:<p>/div></div></div>';
+            discoverContent += '<div class="col s6"><div class="card"><div class="card-image"><img class="responsive-img poster" src="' + imageUrl + '' + discover[i].backdrop_path + '" /><span class="card-title">' + discover[i].title + '</span><p>Score:<p>/div></div></div>';
           } else {
-            discoverContent = '<div class="col s6"><div class="card"><div class="card-image"><img class="responsive-img poster" src="' + discoverImage + '' + discover[i].backdrop_path + '" /><span class="card-title">' + discover[i].title + '</span></div></div></div>';
+            discoverContent = '<div class="col s6"><div class="card"><div class="card-image"><img class="responsive-img poster" src="' + imageUrl + '' + discover[i].backdrop_path + '" /><span class="card-title">' + discover[i].title + '</span></div></div></div>';
           }
         }
         $('.content').hide().html(discoverContent).fadeIn(400);
@@ -475,7 +505,7 @@ popularTelevison();
 
         for (var i = 0; i < discover.length; i++) {
 
-          discoverContent += '<div class="col s6"><div class="card"><div class="card-image"><img class="responsive-img poster" src="' + discoverImage + '' + discover[i].backdrop_path + '" /><span class="card-title">' + discover[i].title + '</span></div></div></div>';
+          discoverContent += '<div class="col s6"><div class="card"><div class="card-image"><img class="responsive-img poster" src="' + imageUrl + '' + discover[i].backdrop_path + '" /><span class="card-title">' + discover[i].title + '</span></div></div></div>';
         }
         $('.content').hide().html(discoverContent).fadeIn(400);
       });
@@ -494,12 +524,11 @@ popularTelevison();
 
         for (var i = 0; i < discover.length; i++) {
 
-          discoverContent += '<div class="col s6"><div class="card"><div class="card-image"><img class="responsive-img poster" src="' + discoverImage + '' + discover[i].backdrop_path + '" /><span class="card-title">' + discover[i].title + '</span></div></div></div>';
+          discoverContent += '<div class="col s6"><div class="card"><div class="card-image"><img class="responsive-img poster" src="' + imageUrl + '' + discover[i].backdrop_path + '" /><span class="card-title">' + discover[i].title + '</span></div></div></div>';
         }
         $('.content').hide().html(discoverContent).fadeIn(400);
       });
-
-
+    });
     });
   }
   discoverContentCall();
