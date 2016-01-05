@@ -135,7 +135,7 @@ $(document).ready(function() {
         $('#next-btn').on('click', '#genrepages-addbtn', function(e) {
           e.preventDefault();
           page = page + 1;
-          var tvGenre = 'https://api.themoviedb.org/3/discover/tv?api_key=3729ffa22dfa780e9abb43dee3074695&page=' + page + '&with_genres=' + genreId;
+          var tvGenre = 'https://api.themoviedb.org/3/discover/tv?api_key=3729ffa22dfa780e9abb43dee3074695&with_genres=' + genreId+'&page=' + page;
 
           $.getJSON(tvGenre, function(data) {
             sortTv = data.results;
@@ -143,7 +143,7 @@ $(document).ready(function() {
             for (var i = 0; i < sortTv.length; i++) {
               if (sortTv[i].backdrop_path === null) {
                 imageUrl = '';
-                searchEngine[i].backdrop_path = 'images/no-poster.png';
+                sortTv[i].backdrop_path = 'images/no-poster.png';
               }
 
               tvList += '<div class="col s6">\
@@ -169,7 +169,7 @@ $(document).ready(function() {
         //Previous Button
         $('#previous-btn').on('click', '#genrepages-backbtn', function(e) {
           e.preventDefault();
-          page = page + 1;
+          page = page - 1;
           genreContent = " ";
 
           tvGenre = 'https://api.themoviedb.org/3/discover/tv?api_key=3729ffa22dfa780e9abb43dee3074695&page=' + page + '&with_genres=' + genreId;
@@ -213,13 +213,10 @@ $(document).ready(function() {
     var genreMinfo = " ";
 
     $('#top-tv').on('click', function() {
-      genreList = 'https://api.themoviedb.org/3/tv/top_rated?api_key=3729ffa22dfa780e9abb43dee3074695';
       $.getJSON(topRatedTvUrl, function(data) {
         genre = data.results;
-        //console.log(genre);
 
         for (var i = 0; i < genre.length; i++) {
-          //console.log(genre[i].name);
 
           genreContent += '<div class="col s6">\
                               <div class="card">\
@@ -237,8 +234,9 @@ $(document).ready(function() {
                                   </li>\
                                 </ul>\
                           </div>';
-          $('.content').html(genreContent).hide().fadeIn(400);
+         
         }
+        $('.content').html(genreContent).hide().fadeIn(400);
         $('#previous-btn').html('<a class="waves-effect waves-black btn-flat" id="toprated-backbtn"><i class="material-icons">skip_previous</i></a>');
         $('#next-btn').html('<a class="waves-effect waves-black btn-flat" id="toprated-addbtn"><i class="material-icons">skip_next</i></a>');
 
@@ -253,7 +251,7 @@ $(document).ready(function() {
       var topRatedTvPageUrl = 'https://api.themoviedb.org/3/tv/top_rated?api_key=3729ffa22dfa780e9abb43dee3074695&page=' + page;
       genreContent = " "
 
-      $.getJSON(genreList, function(data) {
+      $.getJSON(topRatedTvPageUrl, function(data) {
         genre = data.results;
 
         for (var i = 0; i < genre.length; i++) {
@@ -283,10 +281,10 @@ $(document).ready(function() {
       e.preventDefault();
       page = page - 1;
       genreContent = " ";
+      var topRatedTvPageUrl = 'https://api.themoviedb.org/3/tv/top_rated?api_key=3729ffa22dfa780e9abb43dee3074695&page=' + page;
+     
 
-      genreUrl = 'https://api.themoviedb.org/3/tv/top_rated?api_key=3729ffa22dfa780e9abb43dee3074695&page=' + page;
-
-      $.getJSON(genreUrl, function(data) {
+      $.getJSON(topRatedTvPageUrl, function(data) {
         genre = data.results;
 
         for (var i = 0; i < genre.length; i++) {
@@ -344,7 +342,6 @@ $(document).ready(function() {
                                 </ul>\
                           </div>';
         }
-
         $('.content').html(popularContent).hide().fadeIn(400);
         $('#previous-btn').html('<a class="waves-effect waves-black btn-flat" id="popular-backbtn"><i class="material-icons">skip_previous</i></a>');
         $('#next-btn').html('<a class="waves-effect waves-black btn-flat" id="popular-addbtn"><i class="material-icons">skip_next</i></a>');
@@ -455,15 +452,16 @@ $(document).ready(function() {
   }
   moviesOut();
 
-  //discover  Movie List generate
+//Build Movie Genre List dispplay to side nav
 
+
+//discover  Movie List generate
   function discoverContentCall() {
     var page = 1;
-    var discover;
-    var movieGenre;
     $.getJSON(genreMovieList, function(data) {
       var genreMovies = data.genres;
       var page = 1;
+      var movieGenre;
       for (var i = 0; i < genreMovies.length; i++) {
         movieGenre += '<li><a href="" class="genre-movie" value =' + genreMovies[i].id + '>' + genreMovies[i].name + '</a></li>';
       };
@@ -495,74 +493,15 @@ $(document).ready(function() {
                         </li>\
                       </ul>\
                     </div>';
-          };
+          }
           $('.content').html(movieContent).hide().fadeIn(400);
           $('#previous-btn').html('<a class="waves-effect waves-black btn-flat" id="moviepages-backbtn"><i class="material-icons">skip_previous</i></a>');
           $('#next-btn').html('<a class="waves-effect waves-black btn-flat" id="moviepages-addbtn"><i class="material-icons">skip_next</i></a>');
         });
-
-        //next page
-        $('#next-btn').on('click', '#moviepages-addbtn', function(e) {
-          e.preventDefault();
-          page = page + 1;
-
-          $.getJSON(movieListUrl + movieId + '&page=' + page, function(data) {
-            var movieLoad = data.results;
-
-            for (var i = 0; i < movieLoad.length; i++) {
-
-              movieContent += '<div class="col s6">\
-                              <div class="card">\
-                                <div class="card-image">\
-                                  <img class="responsive-img poster" src="' + imageUrl + '' + movieLoad[i].backdrop_path + '" />\
-                                </div>\
-                              </div>\
-                                <ul class="collapsible" data-collapsible="accordion">\
-                                  <li>\
-                                    <div class="collapsible-header">' + movieLoad[i].title + ' <span class="tv-plot right align">' + movieLoad[i].vote_average + '<i class="tiny material-icons">grade</i></span></div>\
-                                    <div class="collapsible-body"><p>' + movieLoad[i].overview + '</p></div>\
-                                  </li>\
-                                </ul>\
-                          </div>';
-            }
-            $('.content').html(movieContent).hide().fadeIn(400);
+     });
 
 
-          });
-
-        });
-        //Previous Button
-        $('#previous-btn').on('click', '#moviepages-backbtn', function(e) {
-          e.preventDefault();
-          page = page - 1;
-          genreContent = " ";
-
-          moviePage = 'https://api.themoviedb.org/3/discover/movie?api_key=3729ffa22dfa780e9abb43dee3074695&page=' + page + '&with_genres=' + movieId;
-
-          $.getJSON(moviePage, function(data) {
-            var movieLoad = data.results;
-
-            for (var i = 0; i < movieLoad.length; i++) {
-
-              movieContent += '<div class="col s6">\
-                              <div class="card">\
-                                <div class="card-image">\
-                                  <img class="responsive-img poster" src="' + imageUrl + '' + movieLoad[i].backdrop_path + '" />\
-                                </div>\
-                              </div>\
-                                <ul class="collapsible" data-collapsible="accordion">\
-                                  <li>\
-                                    <div class="collapsible-header">' + movieLoad[i].title + ' <span class="tv-plot right align">' + movieLoad[i].vote_average + '<i class="tiny material-icons">grade</i></span></div>\
-                                    <div class="collapsible-body"><p>' + movieLoad[i].overview + '</p></div>\
-                                  </li>\
-                                </ul>\
-                          </div>';
-            }
-            $('.content').html(movieContent).hide().fadeIn(400);
-          });
-        });
-      });
-    });
+});
   }
   discoverContentCall();
 
