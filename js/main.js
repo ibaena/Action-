@@ -9,8 +9,8 @@ var topMovieContent;
 var imageUrl = 'https://image.tmdb.org/t/p/w500';
 var genreTvUrl = 'https://api.themoviedb.org/3/genre/tv/list?api_key=3729ffa22dfa780e9abb43dee3074695';
 var tvGenreList = 'https://api.themoviedb.org/3/discover/tv?api_key=3729ffa22dfa780e9abb43dee3074695&with_genres=';
-var genreMovieList = 'https://api.themoviedb.org/3/genre/movie/list?api_key=3729ffa22dfa780e9abb43dee3074695'
-var movieListUrl = 'https://api.themoviedb.org/3/discover/movie?api_key=3729ffa22dfa780e9abb43dee3074695&with_genres='
+var genreMovieList = 'https://api.themoviedb.org/3/genre/movie/list?api_key=3729ffa22dfa780e9abb43dee3074695';
+var movieListUrl = 'https://api.themoviedb.org/3/discover/movie?api_key=3729ffa22dfa780e9abb43dee3074695&with_genres=';
 var page = 1;
 
 
@@ -18,19 +18,14 @@ var page = 1;
 $(document).ready(function() {
   //Side nav initialiazed
   $("#searchDropdown").sideNav();
-  $("#slide-out").on('click', '.genre-tv,#popular-tv, #top-tv', function() {
+  $("#slide-out").on('click','.genre-tv,#popular-tv, #top-tv', function() {
     $("#searchDropdown").sideNav('hide');
   });
   $("#movies").sideNav();
   $("#slide-out1").on('click', '.genre-movie,#popular-movie, #top-movie', function() {
     $("#searchDropdown").sideNav('hide');
   });
-  //collapasible for plot descriptions initialized
-  $('.content').on('click', '.collapsible-header', function() {
-    $('.collapsible').collapsible({
-      accordion: false
-    });
-  });
+ 
 
   //Search Engine user can input movie name, actor, or tv show name. Results will return title, rating, image , and plot.
   function searchItems() {
@@ -139,7 +134,6 @@ $(document).ready(function() {
         $('.content').html(tvList).hide().fadeIn(400);
         $('#previous-btn').html('<a class="waves-effect waves-black btn-flat" id="genrepages-backbtn"><i class="material-icons">skip_previous</i></a>');
         $('#next-btn').html('<a class="waves-effect waves-black btn-flat" id="genrepages-addbtn"><i class="material-icons">skip_next</i></a>');
-
       });
       //next page
       $('#next-btn').on('click', '#genrepages-addbtn', function(e) {
@@ -175,10 +169,7 @@ $(document).ready(function() {
                           </div>';
           }
           $('.content').html(tvList).hide().fadeIn(400);
-
-
         });
-
       });
       //Previous Button
       $('#previous-btn').on('click', '#genrepages-backbtn', function(e) {
@@ -216,7 +207,6 @@ $(document).ready(function() {
           $('.content').html(tvList).hide().fadeIn(400);
         })
       });
-
     });
   }
   buildTvGenrelist();
@@ -259,8 +249,6 @@ $(document).ready(function() {
         $('.content').html(genreContent).hide().fadeIn(400);
         $('#previous-btn').html('<a class="waves-effect waves-black btn-flat" id="toprated-backbtn"><i class="material-icons">skip_previous</i></a>');
         $('#next-btn').html('<a class="waves-effect waves-black btn-flat" id="toprated-addbtn"><i class="material-icons">skip_next</i></a>');
-
-
       });
     });
 
@@ -299,10 +287,7 @@ $(document).ready(function() {
                           </div>';
         }
         $('.content').html(genreContent).hide().fadeIn(400);
-
-
       });
-
     });
     //Previous Button
     $('#previous-btn').on('click', '#toprated-backbtn', function(e) {
@@ -340,9 +325,7 @@ $(document).ready(function() {
         }
         $('.content').html(genreContent).hide().fadeIn(400);
       });
-
     });
-
   }
   topRatedtelevison();
 
@@ -383,8 +366,6 @@ $(document).ready(function() {
         $('.content').html(popularContent).hide().fadeIn(400);
         $('#previous-btn').html('<a class="waves-effect waves-black btn-flat" id="popular-backbtn"><i class="material-icons">skip_previous</i></a>');
         $('#next-btn').html('<a class="waves-effect waves-black btn-flat" id="popular-addbtn"><i class="material-icons">skip_next</i></a>');
-
-
       });
     });
 
@@ -422,10 +403,7 @@ $(document).ready(function() {
                           </div>';
         }
         $('.content').html(popularContent).hide().fadeIn(400);
-
-
       });
-
     });
     //Previous Button
     $('#previous-btn').on('click', '#popular-backbtn', function(e) {
@@ -461,12 +439,8 @@ $(document).ready(function() {
                           </div>';
         }
         $('.content').html(popularContent).hide().fadeIn(400);
-
-
       });
-
     });
-
   }
   popularTelevison();
 
@@ -501,11 +475,8 @@ $(document).ready(function() {
                           </div>';
         }
         $('.content').html(releaseContent).hide().fadeIn(400);
-
       });
-
     });
-
   }
   moviesOut();
 
@@ -518,7 +489,6 @@ $(document).ready(function() {
     };
     $('#slide-out1').append(movieGenre);
   });
-
 
   //discover  Movie List generate
   function discoverContentCall() {
@@ -622,8 +592,6 @@ $(document).ready(function() {
         });
       });
     });
-
-
   }
   discoverContentCall();
 
@@ -662,8 +630,6 @@ $(document).ready(function() {
         $('.content').html(popMovieContent).hide().fadeIn(400);
         $('#previous-btn').html('<a class="waves-effect waves-black btn-flat" id="popmovie-backbtn"><i class="material-icons">skip_previous</i></a>');
         $('#next-btn').html('<a class="waves-effect waves-black btn-flat" id="popmovie-addbtn"><i class="material-icons">skip_next</i></a>');
-
-
       });
     });
 
@@ -697,10 +663,7 @@ $(document).ready(function() {
                           </div>';
         }
         $('.content').html(popMovieContent).hide().fadeIn(400);
-
-
       });
-
     });
     //Previous Button
     $('#previous-btn').on('click', '#popmovie-backbtn', function(e) {
@@ -734,9 +697,7 @@ $(document).ready(function() {
         }
         $('.content').html(popMovieContent).hide().fadeIn(400);
       });
-
     });
-
   }
   popularMoviesBuilder();
 
@@ -775,8 +736,6 @@ $(document).ready(function() {
         $('.content').html(topMovieContent).hide().fadeIn(400);
         $('#previous-btn').html('<a class="waves-effect waves-black btn-flat" id="topmovie-backbtn"><i class="material-icons">skip_previous</i></a>');
         $('#next-btn').html('<a class="waves-effect waves-black btn-flat" id="topmovie-addbtn"><i class="material-icons">skip_next</i></a>');
-
-
       });
     });
 
@@ -810,10 +769,7 @@ $(document).ready(function() {
                           </div>';
         }
         $('.content').html(topMovieContent).hide().fadeIn(400);
-
-
       });
-
     });
     //Previous Button
     $('#previous-btn').on('click', '#topmovie-backbtn', function(e) {
@@ -846,18 +802,9 @@ $(document).ready(function() {
         }
         $('.content').html(topMovieContent).hide().fadeIn(400);
       });
-
     });
-
   }
   topMoviesBuilder();
-
-
-
-
-
-
-
 
 
 });
