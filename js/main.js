@@ -229,6 +229,10 @@ $(document).ready(function() {
         genreContent = " ";
 
         for (var i = 0; i < genre.length; i++) {
+          if (genre[i].backdrop_path === null) {
+              imageUrl = '';
+              genre[i].backdrop_path = 'images/no-poster.png';
+            }  
 
           genreContent += '<div class="col s6">\
                               <div class="card">\
@@ -268,6 +272,10 @@ $(document).ready(function() {
         genreContent = " ";
 
         for (var i = 0; i < genre.length; i++) {
+          if (genre[i].backdrop_path === null) {
+              imageUrl = '';
+              genre[i].backdrop_path = 'images/no-poster.png';
+            }  
 
           genreContent += '<div class="col s6">\
                               <div class="card">\
@@ -301,6 +309,10 @@ $(document).ready(function() {
         genreContent = " ";
 
         for (var i = 0; i < genre.length; i++) {
+          if (genre[i].backdrop_path === null) {
+              imageUrl = '';
+              genre[i].backdrop_path = 'images/no-poster.png';
+            }  
 
           genreContent += '<div class="col s6">\
                               <div class="card">\
@@ -334,10 +346,12 @@ $(document).ready(function() {
       $.getJSON(popularList, function(data) {
         popular = data.results;
         popularContent = '';
-        //console.log(genre);
 
         for (var i = 0; i < popular.length; i++) {
-          //console.log(genre[i].name);
+          if (popular[i].backdrop_path === null) {
+              imageUrl;
+              popular[i].backdrop_path = 'images/no-poster.png';
+            }  
 
           popularContent += '<div class="col s6">\
                               <div class="card">\
@@ -368,29 +382,33 @@ $(document).ready(function() {
     $('#next-btn').on('click', '#popular-addbtn', function(e) {
       e.preventDefault();
       page = page + 1;
-      genreList = 'https://api.themoviedb.org/3/tv/popular?api_key=3729ffa22dfa780e9abb43dee3074695&page=' + page;
-      genreContent = " "
+      popularList = 'https://api.themoviedb.org/3/tv/popular?api_key=3729ffa22dfa780e9abb43dee3074695&page=' + page;
+      popularContent = " ";
 
-      $.getJSON(genreList, function(data) {
-        genre = data.results;
+      $.getJSON(popularList, function(data) {
+        popular = data.results;
 
-        for (var i = 0; i < genre.length; i++) {
+        for (var i = 0; i < popular.length; i++) {
+          if (popular[i].backdrop_path === null) {
+              imageUrl = '';
+              popular[i].backdrop_path = 'images/no-poster.png';
+            }  
 
-          genreContent += '<div class="col s6">\
+          popularContent += '<div class="col s6">\
                               <div class="card">\
                                 <div class="card-image">\
-                                  <img class="responsive-img poster" src="' + imageUrl + '' + genre[i].backdrop_path + '" />\
+                                  <img class="responsive-img poster" src="' + imageUrl + '' + popular[i].backdrop_path + '" />\
                                 </div>\
                               </div>\
                                 <ul class="collapsible" data-collapsible="accordion">\
                                   <li>\
-                                    <div class="collapsible-header">' + genre[i].name + ' <span class="tv-plot right align">' + genre[i].vote_average + '<i class="tiny material-icons">grade</i></span></div>\
-                                    <div class="collapsible-body"><p>' + genre[i].overview + '</p></div>\
+                                    <div class="collapsible-header">' + popular[i].name + ' <span class="tv-plot right align">' + popular[i].vote_average + '<i class="tiny material-icons">grade</i></span></div>\
+                                    <div class="collapsible-body"><p>' + popular[i].overview + '</p></div>\
                                   </li>\
                                 </ul>\
                           </div>';
         }
-        $('.content').html(genreContent).hide().fadeIn(400);
+        $('.content').html(popularContent).hide().fadeIn(400);
 
 
       });
@@ -399,31 +417,36 @@ $(document).ready(function() {
     //Previous Button
     $('#previous-btn').on('click', '#popular-backbtn', function(e) {
       e.preventDefault();
-      page = page - 1;
-      genreContent = " ";
+     page = page + 1;
+      popularList = 'https://api.themoviedb.org/3/tv/popular?api_key=3729ffa22dfa780e9abb43dee3074695&page=' + page;
+      popularContent = " "
 
-      genreUrl = 'https://api.themoviedb.org/3/tv/popular?api_key=3729ffa22dfa780e9abb43dee3074695&page=' + page;
+      $.getJSON(popularList, function(data) {
+        popular = data.results;
 
-      $.getJSON(genreUrl, function(data) {
-        genre = data.results;
+        for (var i = 0; i < popular.length; i++) {
+          if (popular[i].backdrop_path === null) {
+              imageUrl = '';
+              popular[i].backdrop_path = 'images/no-poster.png';
+            }  
 
-        for (var i = 0; i < genre.length; i++) {
-
-          genreContent += '<div class="col s6">\
+          popularContent += '<div class="col s6">\
                               <div class="card">\
                                 <div class="card-image">\
-                                  <img class="responsive-img poster" src="' + imageUrl + '' + genre[i].backdrop_path + '" />\
+                                  <img class="responsive-img poster" src="' + imageUrl + '' + popular[i].backdrop_path + '" />\
                                 </div>\
                               </div>\
                                 <ul class="collapsible" data-collapsible="accordion">\
                                   <li>\
-                                    <div class="collapsible-header">' + genre[i].name + ' <span class="tv-plot right align">' + genre[i].vote_average + '<i class="tiny material-icons">grade</i></span></div>\
-                                    <div class="collapsible-body"><p>' + genre[i].overview + '</p></div>\
+                                    <div class="collapsible-header">' + popular[i].name + ' <span class="tv-plot right align">' + popular[i].vote_average + '<i class="tiny material-icons">grade</i></span></div>\
+                                    <div class="collapsible-body"><p>' + popular[i].overview + '</p></div>\
                                   </li>\
                                 </ul>\
                           </div>';
         }
-        $('.content').html(genreContent).hide().fadeIn(400);
+        $('.content').html(popularContent).hide().fadeIn(400);
+
+
       });
 
     });
@@ -686,7 +709,7 @@ $(document).ready(function() {
   }
   popularMoviesBuilder();
 
-  //Generating a List of top rated movies
+  //Generating a List of top rated movies and display to html in card format
   function topMoviesBuilder() {
     var topMovieList = 'https://api.themoviedb.org/3/movie/top_rated?api_key=3729ffa22dfa780e9abb43dee3074695&page=';
     var page = 1;
@@ -695,7 +718,7 @@ $(document).ready(function() {
     $('#top-movie').on('click', function() {
       $.getJSON(topMovieList, function(data) {
         topMovie = data.results;
-        topMovieContent = '';
+        topMovieContent = ' ';
         //console.log(genre);
 
         for (var i = 0; i < topMovie.length; i++) {
@@ -731,10 +754,10 @@ $(document).ready(function() {
       e.preventDefault();
       page = page + 1;
       topMovieList = 'https://api.themoviedb.org/3/movie/top_rated?api_key=3729ffa22dfa780e9abb43dee3074695&page=';
-      topMovieContent = " "
 
       $.getJSON(topMovieList + page, function(data) {
-        popMovie = data.results;
+        topMovie = data.results;
+        topMovieContent = " ";
 
         for (var i = 0; i < topMovie.length; i++) {
 
@@ -755,7 +778,7 @@ $(document).ready(function() {
                                 </ul>\
                           </div>';
         }
-        $('.content').html(popMovieContent).hide().fadeIn(400);
+        $('.content').html(topMovieContent).hide().fadeIn(400);
 
 
       });
@@ -769,11 +792,10 @@ $(document).ready(function() {
       topMovieList = 'https://api.themoviedb.org/3/movie/top_rated?api_key=3729ffa22dfa780e9abb43dee3074695&page=';
 
       $.getJSON(topMovieList + page, function(data) {
-        popMovie = data.results;
-        popMovieContent = " ";
+        topMovie = data.results;
 
         for (var i = 0; i < popMovie.length; i++) {
-
+          topMovieContent = " ";
           topMovieContent += '<div class="col s6">\
                               <div class="card">\
                                 <div class="card-image">\
@@ -798,6 +820,8 @@ $(document).ready(function() {
 
   }
   topMoviesBuilder();
+
+
 
 
 

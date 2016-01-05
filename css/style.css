@@ -57,3 +57,7 @@ p.card-title{
 p.card-plot{
   display: inline;
 }
+
+.collapsible-body{
+  font-size: 16px;
+}

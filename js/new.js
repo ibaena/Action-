@@ -68,3 +68,35 @@ $(document).ready(function(){
             $('.content').html(movieContent).hide().fadeIn(400);
         });
       });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$('.content').on('click','.poster',function(){
+    $('#modal1').openModal();
+  });
+
+
+
+
+<div id="modal1" class="modal">\
+                                    <div class="modal-content">\
+                                      <h4>' + release[i].title + '</h4>\
+                                      <p>'+ release[i].overview + '/p>\
+                                      <p>'+ release[i].vote_average + '/p>\
+                                    </div>\
+                                  </div>\
+                              </div>'
