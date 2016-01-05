@@ -61,3 +61,31 @@ p.card-plot{
 .collapsible-body{
   font-size: 16px;
 }
+
+.card .card-title{
+  font-size: 17px;
+  font-weight: 400;
+}
+
+.card .card-reveal .card-title{
+  font-size: 22px;
+  font-weight: bold;
+
+}
+
+.tv-plot, .release-date{
+  font-size: 20px;
+  font-weight: bold
+
+}
+
+.plot {
+  font-size: 16px;
+}
+
+.rating{
+  font-size: 16px;
+  font-weight: bold;
+  display: block;
+
+}

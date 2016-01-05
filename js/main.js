@@ -52,41 +52,39 @@ $(document).ready(function() {
             }
             if (searchEngine[i].name !== undefined) {
               grid += '<div class="col s6">\
-                        <div class="card">\
-                          <div class="card-image">\
-                            <img class="responsive-img poster" src="'+imageUrl+''+ searchEngine[i].backdrop_path + '" />\
-                          </div>\
-                        </div>\
-                        <ul class="collapsible" data-collapsible="accordion">\
-                          <li>\
-                            <div class="collapsible-header">' + searchEngine[i].name + '<span class="tv-plot right align">' + searchEngine[i].vote_average + '<i class="tiny material-icons">grade</i></span>\
-                            </div>\
-                            <div class="collapsible-body">\
-                              <p>' + searchEngine[i].overview + '</p>\
-                              <p>' + searchEngine[i].genre_ids + '</p>\
-                            </div>\
-                          </li>\
-                        </ul>\
-                    </div>';
+                              <div class="card">\
+                                <div class="card-image">\
+                                  <img class="responsive-img poster activator" src="' + imageUrl + '' + searchEngine[i].backdrop_path + '" />\
+                                </div>\
+                                <div class="card-content">\
+                                  <span class="card-title activator grey-text text-darken-4 flow-text">' + searchEngine[i].name + '<span class="tv-plot right align">' + searchEngine[i].vote_average + '<i class="tiny material-icons">grade</i></span></span>\
+                                </div>\
+                                  <div class="card-reveal">\
+                                    <span class="card-title activator grey-text text-darken-4 flow-text">' + searchEngine[i].name + '<i class="material-icons right">close</i></span>\</span>\
+                                      <p class="plot">' + searchEngine[i].overview + '</p>\
+                                      <p class="rating">IMDB rating: ' + searchEngine[i].vote_average + '</p>\
+                                    </div>\
+                                </div>\
+                              </div>\
+                          </div>';
               console.log(searchEngine[i]);
             } else {
               grid += '<div class="col s6">\
-                        <div class="card">\
-                          <div class="card-image">\
-                            <img class="responsive-img poster" src="' + imageUrl + '' + searchEngine[i].backdrop_path + '" />\
-                          </div>\
-                        </div>\
-                        <ul class="collapsible" data-collapsible="accordion">\
-                          <li>\
-                            <div class="collapsible-header">' + searchEngine[i].title + '<span class="tv-plot right align">' + searchEngine[i].vote_average + '<i class="tiny material-icons">grade</i></span>\
-                            </div>\
-                            <div class="collapsible-body">\
-                              <p>' + searchEngine[i].overview + '</p>\
-                              <p>' + searchEngine[i].genre_ids + '</p>\
-                            </div>\
-                          </li>\
-                        </ul>\
-                      </div>';
+                              <div class="card">\
+                                <div class="card-image">\
+                                  <img class="responsive-img poster activator" src="' + imageUrl + '' + searchEngine[i].backdrop_path + '" />\
+                                </div>\
+                                <div class="card-content">\
+                                  <span class="card-title activator grey-text text-darken-4 flow-text">' + searchEngine[i].title + '<span class="tv-plot right align">' + searchEngine[i].vote_average + '<i class="tiny material-icons">grade</i></span></span>\
+                                </div>\
+                                  <div class="card-reveal">\
+                                    <span class="card-title activator grey-text text-darken-4 flow-text">' + searchEngine[i].title + '<i class="material-icons right">close</i></span>\</span>\
+                                      <p class="plot">' + searchEngine[i].overview + '</p>\
+                                      <p class="rating">IMDB rating: ' + searchEngine[i].vote_average + '</p>\
+                                    </div>\
+                                </div>\
+                              </div>\
+                          </div>';
             }
           }
           $('.content').html(grid).hide().fadeIn(400);
@@ -122,21 +120,21 @@ $(document).ready(function() {
           }
           //console.log(genre[i].name); 
           tvList += '<div class="col s6">\
-                      <div class="card">\
-                        <div class="card-image">\
-                          <img class="responsive-img poster" src="' + imageUrl + '' + sortTv[i].backdrop_path + '" />\
-                        </div>\
-                      </div>\
-                      <ul class="collapsible" data-collapsible="accordion">\
-                        <li>\
-                            <div class="collapsible-header">' + sortTv[i].name + ' <span class="tv-plot right align">' + sortTv[i].vote_average + '<i class="tiny material-icons">grade</i></span></div>\
-                              <div class="collapsible-body">\
-                                <p>' + sortTv[i].overview + '</p>\
-                                <p>' + sortTv[i].genre_ids + '</p>\
+                              <div class="card">\
+                                <div class="card-image">\
+                                  <img class="responsive-img poster activator" src="' + imageUrl + '' + sortTv[i].backdrop_path + '" />\
+                                </div>\
+                                <div class="card-content">\
+                                  <span class="card-title activator grey-text text-darken-4 flow-text">' + sortTv[i].name + '<span class="tv-plot right align">' + sortTv[i].vote_average + '<i class="tiny material-icons">grade</i></span></span>\
+                                </div>\
+                                  <div class="card-reveal">\
+                                    <span class="card-title activator grey-text text-darken-4 flow-text">' + sortTv[i].name + '<i class="material-icons right">close</i></span>\</span>\
+                                      <p class="plot">' + sortTv[i].overview + '</p>\
+                                      <p class="rating">IMDB rating: ' + sortTv[i].vote_average + '</p>\
+                                    </div>\
+                                </div>\
                               </div>\
-                        </li>\
-                      </ul>\
-                    </div>';
+                          </div>';
         }
         $('.content').html(tvList).hide().fadeIn(400);
         $('#previous-btn').html('<a class="waves-effect waves-black btn-flat" id="genrepages-backbtn"><i class="material-icons">skip_previous</i></a>');
@@ -162,15 +160,18 @@ $(document).ready(function() {
             tvList += '<div class="col s6">\
                               <div class="card">\
                                 <div class="card-image">\
-                                  <img class="responsive-img poster" src="' + imageUrl + '' + sortTv[i].backdrop_path + '" />\
+                                  <img class="responsive-img poster activator" src="' + imageUrl + '' + sortTv[i].backdrop_path + '" />\
+                                </div>\
+                                <div class="card-content">\
+                                  <span class="card-title activator grey-text text-darken-4 flow-text">' + sortTv[i].name + '<span class="tv-plot right align">' + sortTv[i].vote_average + '<i class="tiny material-icons">grade</i></span></span>\
+                                </div>\
+                                  <div class="card-reveal">\
+                                    <span class="card-title activator grey-text text-darken-4 flow-text">' + sortTv[i].name + '<i class="material-icons right">close</i></span>\</span>\
+                                      <p class="plot">' + sortTv[i].overview + '</p>\
+                                      <p class="rating">IMDB rating: ' + sortTv[i].vote_average + '</p>\
+                                    </div>\
                                 </div>\
                               </div>\
-                                <ul class="collapsible" data-collapsible="accordion">\
-                                  <li>\
-                                    <div class="collapsible-header">' + sortTv[i].name + ' <span class="tv-plot right align">' + sortTv[i].vote_average + '<i class="tiny material-icons">grade</i></span></div>\
-                                    <div class="collapsible-body"><p>' + sortTv[i].overview + '</p></div>\
-                                  </li>\
-                                </ul>\
                           </div>';
           }
           $('.content').html(tvList).hide().fadeIn(400);
@@ -198,15 +199,18 @@ $(document).ready(function() {
             tvList += '<div class="col s6">\
                               <div class="card">\
                                 <div class="card-image">\
-                                  <img class="responsive-img poster" src="' + imageUrl + '' + sortTv[i].backdrop_path + '" />\
+                                  <img class="responsive-img poster activator" src="' + imageUrl + '' + sortTv[i].backdrop_path + '" />\
+                                </div>\
+                                <div class="card-content">\
+                                  <span class="card-title activator grey-text text-darken-4 flow-text">' + sortTv[i].name + '<span class="tv-plot right align">' + sortTv[i].vote_average + '<i class="tiny material-icons">grade</i></span></span>\
+                                </div>\
+                                  <div class="card-reveal">\
+                                    <span class="card-title activator grey-text text-darken-4 flow-text">' + sortTv[i].name + '<i class="material-icons right">close</i></span>\</span>\
+                                      <p class="plot">' + sortTv[i].overview + '</p>\
+                                      <p class="rating">IMDB rating: ' + sortTv[i].vote_average + '</p>\
+                                    </div>\
                                 </div>\
                               </div>\
-                                <ul class="collapsible" data-collapsible="accordion">\
-                                  <li>\
-                                    <div class="collapsible-header">' + sortTv[i].name + ' <span class="tv-plot right align">' + sortTv[i].vote_average + '<i class="tiny material-icons">grade</i></span></div>\
-                                    <div class="collapsible-body"><p>' + sortTv[i].overview + '</p></div>\
-                                  </li>\
-                                </ul>\
                           </div>';
           }
           $('.content').html(tvList).hide().fadeIn(400);
@@ -237,18 +241,18 @@ $(document).ready(function() {
           genreContent += '<div class="col s6">\
                               <div class="card">\
                                 <div class="card-image">\
-                                  <img class="responsive-img poster" src="' + imageUrl + '' + genre[i].backdrop_path + '" />\
+                                  <img class="responsive-img poster activator" src="' + imageUrl + '' + genre[i].backdrop_path + '" />\
+                                </div>\
+                                <div class="card-content">\
+                                  <span class="card-title activator grey-text text-darken-4 flow-text">' + genre[i].name + '<span class="tv-plot right align">' + genre[i].vote_average + '<i class="tiny material-icons">grade</i></span></span>\
+                                </div>\
+                                  <div class="card-reveal">\
+                                    <span class="card-title activator grey-text text-darken-4 flow-text">' + genre[i].name + '<i class="material-icons right">close</i></span>\</span>\
+                                      <p class="plot">' + genre[i].overview + '</p>\
+                                      <p class="rating">IMDB rating: ' + genre[i].vote_average + '</p>\
+                                    </div>\
                                 </div>\
                               </div>\
-                                <ul class="collapsible" data-collapsible="accordion">\
-                                  <li>\
-                                    <div class="collapsible-header">' + genre[i].name + ' <span class="tv-plot right align">' + genre[i].vote_average + '<i class="tiny material-icons">grade</i></span></div>\
-                                    <div class="collapsible-body">\
-                                      <p>' + genre[i].overview + '</p>\
-                                      <p>' + genre[i].genre_ids + '</p>\
-                                    </div>\
-                                  </li>\
-                                </ul>\
                           </div>';
 
         }
@@ -280,15 +284,18 @@ $(document).ready(function() {
           genreContent += '<div class="col s6">\
                               <div class="card">\
                                 <div class="card-image">\
-                                  <img class="responsive-img poster" src="' + imageUrl + '' + genre[i].backdrop_path + '" />\
+                                  <img class="responsive-img poster activator" src="' + imageUrl + '' + genre[i].backdrop_path + '" />\
+                                </div>\
+                                <div class="card-content">\
+                                  <span class="card-title activator grey-text text-darken-4 flow-text">' + genre[i].name + '<span class="tv-plot right align">' + genre[i].vote_average + '<i class="tiny material-icons">grade</i></span></span>\
+                                </div>\
+                                  <div class="card-reveal">\
+                                    <span class="card-title activator grey-text text-darken-4 flow-text">' + genre[i].name + '<i class="material-icons right">close</i></span>\</span>\
+                                      <p class="plot">' + genre[i].overview + '</p>\
+                                      <p class="rating">IMDB rating: ' + genre[i].vote_average + '</p>\
+                                    </div>\
                                 </div>\
                               </div>\
-                                <ul class="collapsible" data-collapsible="accordion">\
-                                  <li>\
-                                    <div class="collapsible-header">' + genre[i].name + ' <span class="tv-plot right align">' + genre[i].vote_average + '<i class="tiny material-icons">grade</i></span></div>\
-                                    <div class="collapsible-body"><p>' + genre[i].overview + '</p></div>\
-                                  </li>\
-                                </ul>\
                           </div>';
         }
         $('.content').html(genreContent).hide().fadeIn(400);
@@ -317,15 +324,18 @@ $(document).ready(function() {
           genreContent += '<div class="col s6">\
                               <div class="card">\
                                 <div class="card-image">\
-                                  <img class="responsive-img poster" src="' + imageUrl + '' + genre[i].backdrop_path + '" />\
+                                  <img class="responsive-img poster activator" src="' + imageUrl + '' + genre[i].backdrop_path + '" />\
+                                </div>\
+                                <div class="card-content">\
+                                  <span class="card-title activator grey-text text-darken-4 flow-text">' + genre[i].name + '<span class="tv-plot right align">' + genre[i].vote_average + '<i class="tiny material-icons">grade</i></span></span>\
+                                </div>\
+                                  <div class="card-reveal">\
+                                    <span class="card-title activator grey-text text-darken-4 flow-text">' + genre[i].name + '<i class="material-icons right">close</i></span>\</span>\
+                                      <p class="plot">' + genre[i].overview + '</p>\
+                                      <p class="rating">IMDB rating: ' + genre[i].vote_average + '</p>\
+                                    </div>\
                                 </div>\
                               </div>\
-                                <ul class="collapsible" data-collapsible="accordion">\
-                                  <li>\
-                                    <div class="collapsible-header">' + genre[i].name + ' <span class="tv-plot right align">' + genre[i].vote_average + '<i class="tiny material-icons">grade</i></span></div>\
-                                    <div class="collapsible-body"><p>' + genre[i].overview + '</p></div>\
-                                  </li>\
-                                </ul>\
                           </div>';
         }
         $('.content').html(genreContent).hide().fadeIn(400);
@@ -356,18 +366,18 @@ $(document).ready(function() {
           popularContent += '<div class="col s6">\
                               <div class="card">\
                                 <div class="card-image">\
-                                  <img class="responsive-img poster" src="' + imageUrl + '' + popular[i].backdrop_path + '" />\
+                                  <img class="responsive-img poster activator" src="' + imageUrl + '' + popular[i].backdrop_path + '" />\
+                                </div>\
+                                <div class="card-content">\
+                                  <span class="card-title activator grey-text text-darken-4 flow-text">' + popular[i].name + '<span class="tv-plot right align">' + popular[i].vote_average + '<i class="tiny material-icons">grade</i></span></span>\
+                                </div>\
+                                  <div class="card-reveal">\
+                                    <span class="card-title activator grey-text text-darken-4 flow-text">' + popular[i].name + '<i class="material-icons right">close</i></span>\</span>\
+                                      <p class="plot">' + popular[i].overview + '</p>\
+                                      <p class="rating">IMDB rating: ' + popular[i].vote_average + '</p>\
+                                    </div>\
                                 </div>\
                               </div>\
-                                <ul class="collapsible" data-collapsible="accordion">\
-                                  <li>\
-                                    <div class="collapsible-header">' + popular[i].name + ' <span class="tv-plot right align">' + popular[i].vote_average + '<i class="tiny material-icons">grade</i></span></div>\
-                                    <div class="collapsible-body">\
-                                      <p>' + popular[i].overview + '</p>\
-                                      <p>' + popular[i].genre_ids + '</p>\
-                                    </div>\
-                                  </li>\
-                                </ul>\
                           </div>';
         }
         $('.content').html(popularContent).hide().fadeIn(400);
@@ -397,15 +407,18 @@ $(document).ready(function() {
           popularContent += '<div class="col s6">\
                               <div class="card">\
                                 <div class="card-image">\
-                                  <img class="responsive-img poster" src="' + imageUrl + '' + popular[i].backdrop_path + '" />\
+                                  <img class="responsive-img poster activator" src="' + imageUrl + '' + popular[i].backdrop_path + '" />\
+                                </div>\
+                                <div class="card-content">\
+                                  <span class="card-title activator grey-text text-darken-4 flow-text">' + popular[i].name + '<span class="tv-plot right align">' + popular[i].vote_average + '<i class="tiny material-icons">grade</i></span></span>\
+                                </div>\
+                                  <div class="card-reveal">\
+                                    <span class="card-title activator grey-text text-darken-4 flow-text">' + popular[i].name + '<i class="material-icons right">close</i></span>\</span>\
+                                      <p class="plot">' + popular[i].overview + '</p>\
+                                      <p class="rating">IMDB rating: ' + popular[i].vote_average + '</p>\
+                                    </div>\
                                 </div>\
                               </div>\
-                                <ul class="collapsible" data-collapsible="accordion">\
-                                  <li>\
-                                    <div class="collapsible-header">' + popular[i].name + ' <span class="tv-plot right align">' + popular[i].vote_average + '<i class="tiny material-icons">grade</i></span></div>\
-                                    <div class="collapsible-body"><p>' + popular[i].overview + '</p></div>\
-                                  </li>\
-                                </ul>\
                           </div>';
         }
         $('.content').html(popularContent).hide().fadeIn(400);
@@ -433,17 +446,20 @@ $(document).ready(function() {
           popularContent += '<div class="col s6">\
                               <div class="card">\
                                 <div class="card-image">\
-                                  <img class="responsive-img poster" src="' + imageUrl + '' + popular[i].backdrop_path + '" />\
+                                  <img class="responsive-img poster activator" src="' + imageUrl + '' + popular[i].backdrop_path + '" />\
+                                </div>\
+                                <div class="card-content">\
+                                  <span class="card-title activator grey-text text-darken-4 flow-text">' + popular[i].name + '<span class="tv-plot right align">' + popular[i].vote_average + '<i class="tiny material-icons">grade</i></span></span>\
+                                </div>\
+                                  <div class="card-reveal">\
+                                    <span class="card-title activator grey-text text-darken-4 flow-text">' + popular[i].name + '<i class="material-icons right">close</i></span>\</span>\
+                                      <p class="plot">' + popular[i].overview + '</p>\
+                                      <p class="rating">IMDB rating: ' + popular[i].vote_average + '</p>\
+                                    </div>\
                                 </div>\
                               </div>\
-                                <ul class="collapsible" data-collapsible="accordion">\
-                                  <li>\
-                                    <div class="collapsible-header">' + popular[i].name + ' <span class="tv-plot right align">' + popular[i].vote_average + '<i class="tiny material-icons">grade</i></span></div>\
-                                    <div class="collapsible-body"><p>' + popular[i].overview + '</p></div>\
-                                  </li>\
-                                </ul>\
                           </div>';
-        }
+                        }
         $('.content').html(popularContent).hide().fadeIn(400);
 
 
@@ -470,15 +486,18 @@ $(document).ready(function() {
           releaseContent += '<div class="col s6">\
                               <div class="card">\
                                 <div class="card-image">\
-                                  <img class="responsive-img poster" src="' + imageUrl + '' + release[i].backdrop_path + '" />\
+                                  <img class="responsive-img poster activator" src="' + imageUrl + '' + release[i].backdrop_path + '" />\
+                                </div>\
+                                <div class="card-content">\
+                                  <span class="card-title activator grey-text text-darken-4 flow-text">' + release[i].title + '<span class="tv-plot right align">' + release[i].vote_average + '<i class="tiny material-icons">grade</i></span></span>\
+                                </div>\
+                                  <div class="card-reveal">\
+                                    <span class="card-title activator grey-text text-darken-4 flow-text">' + release[i].title + '<i class="material-icons right">close</i></span>\</span>\
+                                      <p class="plot">' + release[i].overview + '</p>\
+                                      <p class="rating">IMDB rating: ' + release[i].vote_average + '</p>\
+                                    </div>\
                                 </div>\
                               </div>\
-                                <ul class="collapsible" data-collapsible="accordion">\
-                                  <li>\
-                                    <div class="collapsible-header">' + release[i].title + ' <span class="tv-plot right align">' + release[i].vote_average + '<i class="tiny material-icons">grade</i></span></div>\
-                                    <div class="collapsible-body"><p>' + release[i].overview + '</p></div>\
-                                  </li>\
-                                </ul>\
                           </div>';
         }
         $('.content').html(releaseContent).hide().fadeIn(400);
@@ -517,21 +536,21 @@ $(document).ready(function() {
             sortMovie[i].backdrop_path = 'images/no-poster.png';
           }
           movieContent += '<div class="col s6">\
-                      <div class="card">\
-                        <div class="card-image">\
-                          <img class="responsive-img poster" src="' + imageUrl + '' + sortMovie[i].backdrop_path + '" />\
-                        </div>\
-                      </div>\
-                      <ul class="collapsible" data-collapsible="accordion">\
-                        <li>\
-                            <div class="collapsible-header">' + sortMovie[i].title + ' <span class="tv-plot right align">' + sortMovie[i].vote_average + '<i class="tiny material-icons">grade</i></span></div>\
-                              <div class="collapsible-body">\
-                                <p>' + sortMovie[i].overview + '</p>\
-                                <p>' + sortMovie[i].genre_ids + '</p>\
+                              <div class="card">\
+                                <div class="card-image">\
+                                  <img class="responsive-img poster activator" src="' + imageUrl + '' + sortMovie[i].backdrop_path + '" />\
+                                </div>\
+                                <div class="card-content">\
+                                  <span class="card-title activator grey-text text-darken-4 flow-text">' + sortMovie[i].title + '<span class="tv-plot right align">' + sortMovie[i].vote_average + '<i class="tiny material-icons">grade</i></span></span>\
+                                </div>\
+                                  <div class="card-reveal">\
+                                    <span class="card-title activator grey-text text-darken-4 flow-text">' + sortMovie[i].title + '<i class="material-icons right">close</i></span>\</span>\
+                                      <p class="plot">' + sortMovie[i].overview + '</p>\
+                                      <p class="rating">IMDB rating: ' + sortMovie[i].vote_average + '</p>\
+                                    </div>\
+                                </div>\
                               </div>\
-                        </li>\
-                      </ul>\
-                    </div>';
+                          </div>';
         }
         $('.content').html(movieContent).hide().fadeIn(400);
         $('#previous-btn').html('<a class="waves-effect waves-black btn-flat" id="moviepages-backbtn"><i class="material-icons">skip_previous</i></a>');
@@ -551,15 +570,18 @@ $(document).ready(function() {
             movieContent += '<div class="col s6">\
                               <div class="card">\
                                 <div class="card-image">\
-                                  <img class="responsive-img poster" src="' + imageUrl + '' + movieLoad[i].backdrop_path + '" />\
+                                  <img class="responsive-img poster activator" src="' + imageUrl + '' + movieLoad[i].backdrop_path + '" />\
+                                </div>\
+                                <div class="card-content">\
+                                  <span class="card-title activator grey-text text-darken-4 flow-text">' + movieLoad[i].title + '<span class="tv-plot right align">' + movieLoad[i].vote_average + '<i class="tiny material-icons">grade</i></span></span>\
+                                </div>\
+                                  <div class="card-reveal">\
+                                    <span class="card-title activator grey-text text-darken-4 flow-text">' + movieLoad[i].title + '<i class="material-icons right">close</i></span>\</span>\
+                                      <p class="plot">' + movieLoad[i].overview + '</p>\
+                                      <p class="rating">IMDB rating: ' + movieLoad[i].vote_average + '</p>\
+                                    </div>\
                                 </div>\
                               </div>\
-                                <ul class="collapsible" data-collapsible="accordion">\
-                                  <li>\
-                                    <div class="collapsible-header">' + movieLoad[i].title + ' <span class="tv-plot right align">' + movieLoad[i].vote_average + '<i class="tiny material-icons">grade</i></span></div>\
-                                    <div class="collapsible-body"><p>' + movieLoad[i].overview + '</p></div>\
-                                  </li>\
-                                </ul>\
                           </div>';
           }
           $('.content').html(movieContent).hide().fadeIn(400);
@@ -582,15 +604,18 @@ $(document).ready(function() {
             movieContent += '<div class="col s6">\
                               <div class="card">\
                                 <div class="card-image">\
-                                  <img class="responsive-img poster" src="' + imageUrl + '' + movieLoad[i].backdrop_path + '" />\
+                                  <img class="responsive-img poster activator" src="' + imageUrl + '' + movieLoad[i].backdrop_path + '" />\
+                                </div>\
+                                <div class="card-content">\
+                                  <span class="card-title activator grey-text text-darken-4 flow-text">' + movieLoad[i].title + '<span class="tv-plot right align">' + movieLoad[i].vote_average + '<i class="tiny material-icons">grade</i></span></span>\
+                                </div>\
+                                  <div class="card-reveal">\
+                                    <span class="card-title activator grey-text text-darken-4 flow-text">' + movieLoad[i].title + '<i class="material-icons right">close</i></span>\</span>\
+                                      <p class="plot">' + movieLoad[i].overview + '</p>\
+                                      <p class="rating">IMDB rating: ' + movieLoad[i].vote_average + '</p>\
+                                    </div>\
                                 </div>\
                               </div>\
-                                <ul class="collapsible" data-collapsible="accordion">\
-                                  <li>\
-                                    <div class="collapsible-header">' + movieLoad[i].title + ' <span class="tv-plot right align">' + movieLoad[i].vote_average + '<i class="tiny material-icons">grade</i></span></div>\
-                                    <div class="collapsible-body"><p>' + movieLoad[i].overview + '</p></div>\
-                                  </li>\
-                                </ul>\
                           </div>';
           }
           $('.content').html(movieContent).hide().fadeIn(400);
@@ -620,20 +645,20 @@ $(document).ready(function() {
           popMovieContent += '<div class="col s6">\
                               <div class="card">\
                                 <div class="card-image">\
-                                  <img class="responsive-img poster" src="' + imageUrl + '' + popMovie[i].backdrop_path + '" />\
+                                  <img class="responsive-img poster activator" src="' + imageUrl + '' + popMovie[i].backdrop_path + '" />\
+                                </div>\
+                                <div class="card-content">\
+                                  <span class="card-title activator grey-text text-darken-4 flow-text">' + popMovie[i].title + '<span class="tv-plot right align">' + popMovie[i].vote_average + '<i class="tiny material-icons">grade</i></span></span>\
+                                </div>\
+                                  <div class="card-reveal">\
+                                    <span class="card-title activator grey-text text-darken-4 flow-text">' + popMovie[i].title + '<i class="material-icons right">close</i></span>\</span>\
+                                      <p class="plot">' + popMovie[i].overview + '</p>\
+                                      <p class="rating">IMDB rating: ' + popMovie[i].vote_average + '</p>\
+                                    </div>\
                                 </div>\
                               </div>\
-                                <ul class="collapsible" data-collapsible="accordion">\
-                                  <li>\
-                                    <div class="collapsible-header">' + popMovie[i].title + ' <span class="tv-plot right align">' + popMovie[i].vote_average + '<i class="tiny material-icons">grade</i></span></div>\
-                                    <div class="collapsible-body">\
-                                      <p>' + popMovie[i].overview + '</p>\
-                                      <p>' + popMovie[i].genre_ids + '</p>\
-                                    </div>\
-                                  </li>\
-                                </ul>\
                           </div>';
-        }
+          }
         $('.content').html(popMovieContent).hide().fadeIn(400);
         $('#previous-btn').html('<a class="waves-effect waves-black btn-flat" id="popmovie-backbtn"><i class="material-icons">skip_previous</i></a>');
         $('#next-btn').html('<a class="waves-effect waves-black btn-flat" id="popmovie-addbtn"><i class="material-icons">skip_next</i></a>');
@@ -657,15 +682,18 @@ $(document).ready(function() {
           popMovieContent += '<div class="col s6">\
                               <div class="card">\
                                 <div class="card-image">\
-                                  <img class="responsive-img poster" src="' + imageUrl + '' + popMovie[i].backdrop_path + '" />\
+                                  <img class="responsive-img poster activator" src="' + imageUrl + '' + popMovie[i].backdrop_path + '" />\
+                                </div>\
+                                <div class="card-content">\
+                                  <span class="card-title activator grey-text text-darken-4 flow-text">' + popMovie[i].title + '<span class="tv-plot right align">' + popMovie[i].vote_average + '<i class="tiny material-icons">grade</i></span></span>\
+                                </div>\
+                                  <div class="card-reveal">\
+                                    <span class="card-title activator grey-text text-darken-4 flow-text">' + popMovie[i].title + '<i class="material-icons right">close</i></span>\</span>\
+                                      <p class="plot">' + popMovie[i].overview + '</p>\
+                                      <p class="rating">IMDB rating: ' + popMovie[i].vote_average + '</p>\
+                                    </div>\
                                 </div>\
                               </div>\
-                                <ul class="collapsible" data-collapsible="accordion">\
-                                  <li>\
-                                    <div class="collapsible-header">' + popMovie[i].title + ' <span class="tv-plot right align">' + popMovie[i].vote_average + '<i class="tiny material-icons">grade</i></span></div>\
-                                    <div class="collapsible-body"><p>' + popMovie[i].overview + '</p></div>\
-                                  </li>\
-                                </ul>\
                           </div>';
         }
         $('.content').html(popMovieContent).hide().fadeIn(400);
@@ -690,15 +718,18 @@ $(document).ready(function() {
           popMovieContent += '<div class="col s6">\
                               <div class="card">\
                                 <div class="card-image">\
-                                  <img class="responsive-img poster" src="' + imageUrl + '' + popMovie[i].backdrop_path + '" />\
+                                  <img class="responsive-img poster activator" src="' + imageUrl + '' + popMovie[i].backdrop_path + '" />\
+                                </div>\
+                                <div class="card-content">\
+                                  <span class="card-title activator grey-text text-darken-4 flow-text">' + popMovie[i].title + '<span class="tv-plot right align">' + popMovie[i].vote_average + '<i class="tiny material-icons">grade</i></span></span>\
+                                </div>\
+                                  <div class="card-reveal">\
+                                    <span class="card-title activator grey-text text-darken-4 flow-text">' + popMovie[i].title + '<i class="material-icons right">close</i></span>\</span>\
+                                      <p class="plot">' + popMovie[i].overview + '</p>\
+                                      <p class="rating">IMDB rating: ' + popMovie[i].vote_average + '</p>\
+                                    </div>\
                                 </div>\
                               </div>\
-                                <ul class="collapsible" data-collapsible="accordion">\
-                                  <li>\
-                                    <div class="collapsible-header">' + popMovie[i].title + ' <span class="tv-plot right align">' + popMovie[i].vote_average + '<i class="tiny material-icons">grade</i></span></div>\
-                                    <div class="collapsible-body"><p>' + popMovie[i].overview + '</p></div>\
-                                  </li>\
-                                </ul>\
                           </div>';
         }
         $('.content').html(popMovieContent).hide().fadeIn(400);
@@ -727,18 +758,18 @@ $(document).ready(function() {
           topMovieContent += '<div class="col s6">\
                               <div class="card">\
                                 <div class="card-image">\
-                                  <img class="responsive-img poster" src="' + imageUrl + '' + topMovie[i].backdrop_path + '" />\
+                                  <img class="responsive-img poster activator" src="' + imageUrl + '' + topMovie[i].backdrop_path + '" />\
+                                </div>\
+                                <div class="card-content">\
+                                  <span class="card-title activator grey-text text-darken-4 flow-text">' + topMovie[i].title + '<span class="tv-plot right align">' + topMovie[i].vote_average + '<i class="tiny material-icons">grade</i></span></span>\
+                                </div>\
+                                  <div class="card-reveal">\
+                                    <span class="card-title activator grey-text text-darken-4 flow-text">' + topMovie[i].title + '<i class="material-icons right">close</i></span>\</span>\
+                                      <p class="plot">' + topMovie[i].overview + '</p>\
+                                      <p class="rating">IMDB rating: ' + topMovie[i].vote_average + '</p>\
+                                    </div>\
                                 </div>\
                               </div>\
-                                <ul class="collapsible" data-collapsible="accordion">\
-                                  <li>\
-                                    <div class="collapsible-header">' + topMovie[i].title + ' <span class="tv-plot right align">' + topMovie[i].vote_average + '<i class="tiny material-icons">grade</i></span></div>\
-                                    <div class="collapsible-body">\
-                                      <p>' + topMovie[i].overview + '</p>\
-                                      <p>' + topMovie[i].genre_ids + '</p>\
-                                    </div>\
-                                  </li>\
-                                </ul>\
                           </div>';
         }
         $('.content').html(topMovieContent).hide().fadeIn(400);
@@ -764,18 +795,18 @@ $(document).ready(function() {
           topMovieContent += '<div class="col s6">\
                               <div class="card">\
                                 <div class="card-image">\
-                                  <img class="responsive-img poster" src="' + imageUrl + '' + topMovie[i].backdrop_path + '" />\
+                                  <img class="responsive-img poster activator" src="' + imageUrl + '' + topMovie[i].backdrop_path + '" />\
+                                </div>\
+                                <div class="card-content">\
+                                  <span class="card-title activator grey-text text-darken-4 flow-text">' + topMovie[i].title + '<span class="tv-plot right align">' + topMovie[i].vote_average + '<i class="tiny material-icons">grade</i></span></span>\
+                                </div>\
+                                  <div class="card-reveal">\
+                                    <span class="card-title activator grey-text text-darken-4 flow-text">' + topMovie[i].title + '<i class="material-icons right">close</i></span>\</span>\
+                                      <p class="plot">' + topMovie[i].overview + '</p>\
+                                      <p class="rating">IMDB rating: ' + topMovie[i].vote_average + '</p>\
+                                    </div>\
                                 </div>\
                               </div>\
-                                <ul class="collapsible" data-collapsible="accordion">\
-                                  <li>\
-                                    <div class="collapsible-header">' + topMovie[i].title + ' <span class="tv-plot right align">' + topMovie[i].vote_average + '<i class="tiny material-icons">grade</i></span></div>\
-                                    <div class="collapsible-body">\
-                                      <p>' + topMovie[i].overview + '</p>\
-                                      <p>' + topMovie[i].genre_ids + '</p>\
-                                    </div>\
-                                  </li>\
-                                </ul>\
                           </div>';
         }
         $('.content').html(topMovieContent).hide().fadeIn(400);
@@ -799,18 +830,18 @@ $(document).ready(function() {
           topMovieContent += '<div class="col s6">\
                               <div class="card">\
                                 <div class="card-image">\
-                                  <img class="responsive-img poster" src="' + imageUrl + '' + topMovie[i].backdrop_path + '" />\
+                                  <img class="responsive-img poster activator" src="' + imageUrl + '' + topMovie[i].backdrop_path + '" />\
+                                </div>\
+                                <div class="card-content">\
+                                  <span class="card-title activator grey-text text-darken-4 flow-text">' + topMovie[i].title + '<span class="tv-plot right align">' + topMovie[i].vote_average + '<i class="tiny material-icons">grade</i></span></span>\
+                                </div>\
+                                  <div class="card-reveal">\
+                                    <span class="card-title activator grey-text text-darken-4 flow-text">' + topMovie[i].title + '<i class="material-icons right">close</i></span>\</span>\
+                                      <p class="plot">' + topMovie[i].overview + '</p>\
+                                      <p class="rating">IMDB rating: ' + topMovie[i].vote_average + '</p>\
+                                    </div>\
                                 </div>\
                               </div>\
-                                <ul class="collapsible" data-collapsible="accordion">\
-                                  <li>\
-                                    <div class="collapsible-header">' + topMovie[i].title + ' <span class="tv-plot right align">' + topMovie[i].vote_average + '<i class="tiny material-icons">grade</i></span></div>\
-                                    <div class="collapsible-body">\
-                                      <p>' + topMovie[i].overview + '</p>\
-                                      <p>' + topMovie[i].genre_ids + '</p>\
-                                    </div>\
-                                  </li>\
-                                </ul>\
                           </div>';
         }
         $('.content').html(topMovieContent).hide().fadeIn(400);
