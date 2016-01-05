@@ -420,7 +420,7 @@ $(document).ready(function() {
   //create Theatre list
   function moviesOut() {
 
-    var movieList = 'http://api.themoviedb.org/3/movie/now_playing?api_key=3729ffa22dfa780e9abb43dee3074695&query';
+    var movieList = 'https://api.themoviedb.org/3/movie/now_playing?api_key=3729ffa22dfa780e9abb43dee3074695&query';
     var release;
     $('#release').on('click', function(e) {
       e.preventDefault();
