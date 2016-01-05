@@ -6,7 +6,6 @@ var tvList;
 var movieContent;
 var popMovieContent;
 var topMovieContent;
-var tvGenre;
 var imageUrl = 'https://image.tmdb.org/t/p/w500';
 var genreTvUrl = 'https://api.themoviedb.org/3/genre/tv/list?api_key=3729ffa22dfa780e9abb43dee3074695';
 var tvGenreList = 'https://api.themoviedb.org/3/discover/tv?api_key=3729ffa22dfa780e9abb43dee3074695&with_genres=';
@@ -19,7 +18,13 @@ var page = 1;
 $(document).ready(function() {
   //Side nav initialiazed
   $("#searchDropdown").sideNav();
+  $("#slide-out").on('click','.genre-tv,#popular-tv, #top-tv',function(){
+    $("#searchDropdown").sideNav('hide');
+  });
   $("#movies").sideNav();
+  $("#slide-out1").on('click','.genre-movie,#popular-movie, #top-movie',function(){
+    $("#searchDropdown").sideNav('hide');
+  });
   //collapasible for plot descriptions initialized
   $('.content').on('click', '.collapsible-header', function() {
     $('.collapsible').collapsible({
@@ -94,6 +99,7 @@ $(document).ready(function() {
   //Build TV genre List
   $.getJSON(genreTvUrl, function(data) {
     var genreNames = data.genres;
+    var tvGenre = " ";
     for (var i = 0; i < genreNames.length; i++) {
       tvGenre += '<li><a href="" class="genre-tv" value =' + genreNames[i].id + '>' + genreNames[i].name + '</a></li>';
     };
@@ -425,7 +431,7 @@ $(document).ready(function() {
   }
   popularTelevison();
 
-  //create Theatre list
+  //Generate a List of movies currently out in theatre this list will update daily
   function moviesOut() {
 
     var movieList = 'https://api.themoviedb.org/3/movie/now_playing?api_key=3729ffa22dfa780e9abb43dee3074695&query';
@@ -434,6 +440,7 @@ $(document).ready(function() {
       e.preventDefault();
       $.getJSON(movieList, function(data) {
         release = data.results;
+        releaseContent = " ";
 
         for (var i = 0; i < release.length; i++) {
           //console.log(release[i].title);
@@ -463,7 +470,7 @@ $(document).ready(function() {
   //Build Movie Genre List dispplay to side nav
   $.getJSON(genreMovieList, function(data) {
     var genreMovies = data.genres;
-    var movieGenre;
+    var movieGenre = " ";
     for (var i = 0; i < genreMovies.length; i++) {
       movieGenre += '<li><a href="" class="genre-movie" value =' + genreMovies[i].id + '>' + genreMovies[i].name + '</a></li>';
     };
@@ -572,14 +579,14 @@ $(document).ready(function() {
   }
   discoverContentCall();
 
-//Generating a List of movies based on genre chosen
+  //Generating a List of movies based on genre chosen
   function popularMoviesBuilder() {
     var popMovieList = 'https://api.themoviedb.org/3/movie/popular?api_key=3729ffa22dfa780e9abb43dee3074695&page=';
     var page = 1;
     var popMovie;
 
     $('#popular-movie').on('click', function() {
-      $.getJSON(popMovieList , function(data) {
+      $.getJSON(popMovieList, function(data) {
         popMovie = data.results;
         popMovieContent = '';
         //console.log(genre);
@@ -616,10 +623,10 @@ $(document).ready(function() {
     $('#next-btn').on('click', '#popmovie-addbtn', function(e) {
       e.preventDefault();
       page = page + 1;
-      popMovieList  = 'https://api.themoviedb.org/3/movie/popular?api_key=3729ffa22dfa780e9abb43dee3074695&page=';
+      popMovieList = 'https://api.themoviedb.org/3/movie/popular?api_key=3729ffa22dfa780e9abb43dee3074695&page=';
       popMovieContent = " "
 
-      $.getJSON(popMovieList+page , function(data) {
+      $.getJSON(popMovieList + page, function(data) {
         popMovie = data.results;
 
         for (var i = 0; i < popMovie.length; i++) {
@@ -650,9 +657,9 @@ $(document).ready(function() {
       page = page - 1;
       popMovieContent = " ";
 
-      popMovieList  = 'https://api.themoviedb.org/3/movie/popular?api_key=3729ffa22dfa780e9abb43dee3074695&page=';
+      popMovieList = 'https://api.themoviedb.org/3/movie/popular?api_key=3729ffa22dfa780e9abb43dee3074695&page=';
 
-      $.getJSON(popMovieList+page , function(data) {
+      $.getJSON(popMovieList + page, function(data) {
         popMovie = data.results;
 
         for (var i = 0; i < popMovie.length; i++) {
@@ -679,14 +686,14 @@ $(document).ready(function() {
   }
   popularMoviesBuilder();
 
-//Generating a List of top rated movies
- function topMoviesBuilder() {
+  //Generating a List of top rated movies
+  function topMoviesBuilder() {
     var topMovieList = 'https://api.themoviedb.org/3/movie/top_rated?api_key=3729ffa22dfa780e9abb43dee3074695&page=';
     var page = 1;
     var topMovie;
 
     $('#top-movie').on('click', function() {
-      $.getJSON(topMovieList , function(data) {
+      $.getJSON(topMovieList, function(data) {
         topMovie = data.results;
         topMovieContent = '';
         //console.log(genre);
@@ -726,7 +733,7 @@ $(document).ready(function() {
       topMovieList = 'https://api.themoviedb.org/3/movie/top_rated?api_key=3729ffa22dfa780e9abb43dee3074695&page=';
       topMovieContent = " "
 
-      $.getJSON(topMovieList+page , function(data) {
+      $.getJSON(topMovieList + page, function(data) {
         popMovie = data.results;
 
         for (var i = 0; i < topMovie.length; i++) {
@@ -761,7 +768,7 @@ $(document).ready(function() {
 
       topMovieList = 'https://api.themoviedb.org/3/movie/top_rated?api_key=3729ffa22dfa780e9abb43dee3074695&page=';
 
-      $.getJSON(topMovieList+page , function(data) {
+      $.getJSON(topMovieList + page, function(data) {
         popMovie = data.results;
         popMovieContent = " ";
 
@@ -791,7 +798,6 @@ $(document).ready(function() {
 
   }
   topMoviesBuilder();
-
 
 
 
