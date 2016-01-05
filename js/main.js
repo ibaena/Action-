@@ -54,7 +54,7 @@ $(document).ready(function() {
               grid += '<div class="col s6">\
                         <div class="card">\
                           <div class="card-image">\
-                            <img class="responsive-img poster" src="' + searchEngine[i].backdrop_path + '" />\
+                            <img class="responsive-img poster" src="'+imageUrl+''+ searchEngine[i].backdrop_path + '" />\
                           </div>\
                         </div>\
                         <ul class="collapsible" data-collapsible="accordion">\
