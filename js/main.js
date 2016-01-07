@@ -7,11 +7,7 @@ var tvGlist;
 
 $(document).ready(function() {
 
-  $( ".poster" )
-  .error(function() {
-    $( this ).attr( "src", "replacement.png" );
-  })
-  .attr( "src", "missing.png" );
+
 
 
   //tmdb
@@ -50,9 +46,7 @@ $(document).ready(function() {
     var genreMinfo = " ";
 
     $('#searchDropdown').on('click', function() {
-      $('.poster').error(function(){
-        $(this).attr('src', 'images/insta.png');
-});
+      
 
       $.getJSON(genreList, function(data) {
         //console.log('data');
