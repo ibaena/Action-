@@ -2,7 +2,7 @@ $(document).ready(function () {
 
   $(".input-field").keypress(function (e) {
     // variables for url construction
-    var today =;
+    var today;
     var apiKey = "3pc86f2jfnwqg359td2p3vwr";
     var zipCode = $("#zip").val();
     var mileEntry = $("#radius").val();
@@ -15,12 +15,12 @@ $(document).ready(function () {
     
 
     if (e.which == 13) {
-      $.ajax({
-        type: "GET",
-        url: showtimesUrl,
-        success: (function (data) {
-          console.log(data);
-        })
+      $.getJSON(showtimesUrl, function(data) {
+
+        for (var i = 0; i < data.length; i++) {
+          var movies = data[i];
+          console.log(movies);
+        };
       });
     };
   
