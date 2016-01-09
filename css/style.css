@@ -28,10 +28,6 @@ span.card-title{
   text-align: right;
 }
 
-.tv-plot{
-  text-overflow: ellipsis;
-}
-
   body {
     display: flex;
     min-height: 100vh;
@@ -42,28 +38,30 @@ span.card-title{
     flex: 1 0 auto;
   }
 
-
+img.responsive-img.poster {
+    cursor: pointer;
+}
 
 .tv-plot, .release-date{
   font-size: 16px;
   text-align: left;
   padding-left: 5px;
+  float: right;
 }
 
-p.card-title{
-  display: inline;
-}
+.date{
+      font-size: 16px;
+    font-weight: bold;
+    float: left;
+    text-align: left;
+  }
 
-p.card-plot{
-  display: inline;
-}
-
-.collapsible-body{
-  font-size: 16px;
+.card-content{
+  height: 80px;
 }
 
 .card .card-title{
-  font-size: 16px;
+  font-size: 1.1em;
   font-weight: 400;
 }
 
@@ -74,18 +72,18 @@ p.card-plot{
 }
 
 .tv-plot, .release-date{
-  font-size: 20px;
-  font-weight: bold
+  font-size: 1.1em;;
+  font-weight: bold;
 
 }
 
 .plot {
   font-size: 16px;
+  float: left;
 }
 
 .rating{
   font-size: 16px;
   font-weight: bold;
-  display: block;
-
+  float:left;
 }
