@@ -3,14 +3,6 @@ img.responsive-img.poster{
 max-height:100%;
 }
 
-tbody.image {
- 
-}
-
-.dynamic {
-
-}
-
 .footer {
   background-color: #000;
   color: white;
@@ -82,8 +74,13 @@ img.responsive-img.poster {
   float: left;
 }
 
-.rating{
+.rating, .trailers{
   font-size: 16px;
   font-weight: bold;
   float:left;
+}
+
+.video-container{
+  z-index: 9999;
+
 }

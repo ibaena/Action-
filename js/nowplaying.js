@@ -5,6 +5,30 @@ function replaceBrokenImages(){
     $(this).unbind("error").attr("src", "images/no-poster.png");
   });
 };
+
+//generate trailer videos on button click
+function loadTrailers(){
+  $('.content').on('click','.trailers', function(){
+      trailerMovieId = $(this).attr('value');
+       $.getJSON('https://api.themoviedb.org/3/movie/'+trailerMovieId+'/videos?api_key=3729ffa22dfa780e9abb43dee3074695',function(data){
+        var trailerMovies = data.results;
+        modalContent = ' ';
+        for (var i = 0; i < trailerMovies.length; i++){
+          console.log(trailerMovies[i].key);
+
+          modalContent += '<div id="modal1" class="modal">\
+                            <div class="modal-content">\
+                              <div class="video-container">\
+                                <iframe class="player" width="853" height="520" src="https://www.youtube.com/embed/'+trailerMovies[i].key+'?rel=0" frameborder="0" allowfullscreen></iframe>\
+                              </div>\
+                            </div>\
+                          </div>';             
+        }; 
+        $('.modal-display').html(modalContent);
+        $('#modal1').openModal();
+      });
+});
+};
 //Generate a List of movies currently out in theatre this list will update daily
   function moviesOut() {
     var movieList = 'https://api.themoviedb.org/3/movie/now_playing?api_key=3729ffa22dfa780e9abb43dee3074695&query';
@@ -30,6 +54,8 @@ function replaceBrokenImages(){
                                       <p class="plot">' + release[i].overview + '</p>\
                                       <p class="rating">IMDB rating: '+release[i].vote_average+',</p>\
                                       <p class="date pull right"><i class="material-icons left">today</i> ' + release[i].release_date + '</p>\
+                                      <p class="waves-effect waves-light white btn modal-trigger trailers black-text" href="#modal1" value="'+release[i].id+'">\
+                                      <i class="material-icons right">videocam</i>Launch Trailer</p>\
                                     </div>\
                                 </div>\
                               </div>\
@@ -37,6 +63,7 @@ function replaceBrokenImages(){
         };
         $('.content').html(releaseContent).hide().fadeIn(400);
         replaceBrokenImages();
+        loadTrailers();
       });
     });
   }

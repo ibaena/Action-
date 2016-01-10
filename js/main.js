@@ -16,6 +16,8 @@ var movieListUrl = 'https://api.themoviedb.org/3/discover/movie?api_key=3729ffa2
 var page = 1;
 var addMovieGenre = [];
 var addMovieListName;
+var trailerMovieId;
+var modalContent = " ";
 
 $(document).ready(function() {
 
@@ -34,6 +36,16 @@ $(document).ready(function() {
     $(this).unbind("error").attr("src", "images/no-poster.png");
   });
 }
+//iframe on exit stop
+jQuery(function () {
+  jQuery().on("click", function () {
+    jQuery('iframe').contents().find('video').each(function () {
+      this.currentTime = 0;
+      this.pause();
+    });
+  });
+});
+
  
   //Generating a List of movies based on genre chosen
   function popularMoviesBuilder() {
@@ -231,6 +243,4 @@ $(document).ready(function() {
     });
   }
   topMoviesBuilder();
-  
-
 });
