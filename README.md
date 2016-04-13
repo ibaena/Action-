@@ -18,12 +18,4 @@ technologies used:
 * http://www.omdbapi.com/
 * http://developer.rottentomatoes.com/
 
-##trello: 
-* https://trello.com/b/3V6nqDMk/action
 
-3729ffa22dfa780e9abb43dee3074695
-
-api_key: "YOUR_KEY",
-
-http://api.themoviedb.org/3/movie/550?api_key=###3729ffa22dfa780e9abb43dee3074695
-http://api.themoviedb.org/3/search/movie?api_key=3729ffa22dfa780e9abb43dee3074695&query=spiderman
